@@ -34,6 +34,9 @@
               "src/vendor/jquery/jquery.min.js",
               "src/vendor/popper.js/umd/popper.min.js",
               "src/vendor/bootstrap/js/bootstrap.min.js",
+              "src/vendor/jquery.cookie/jquery.cookie.js",
+              "src/vendor/jquery-validation/jquery.validate.min.js",
+              "src/assets/js/front.js",
               "node_modules/datatables.net/js/jquery.dataTables.js"
 			]
           },

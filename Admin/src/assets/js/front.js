@@ -44,7 +44,7 @@ $(document).ready(function () {
     // ------------------------------------------------------ //
     $('#toggle-btn').on('click', function (e) {
         e.preventDefault();
-        $(this).toggleClass('active');
+        $(this).toggleClass("active");
 
         $('.side-navbar').toggleClass('shrinked');
         $('.content-inner').toggleClass('active');
