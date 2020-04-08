@@ -3,6 +3,7 @@ import { UserService } from '../../../_services/user.service';
 import { StaffService } from '../../../_services/staff.service';
 import { Subject } from 'rxjs';
 
+// declare jquery;
 declare var $: any;
 
 interface Customer {
@@ -17,7 +18,8 @@ export class CustomersListComponent implements AfterViewInit, OnDestroy, OnInit 
   // customersList = [];
   customersList: Customer;
 
-  dtTrigger: Subject<any> = new Subject();
+  // dtTrigger: Subject<any> = new Subject();
+
   constructor(
     public userService: UserService,
     private staffService: StaffService
@@ -29,21 +31,41 @@ export class CustomersListComponent implements AfterViewInit, OnDestroy, OnInit 
     };
   }
 
-  ngOnInit() {
-    this.staffService.customersList.subscribe(data => {
-      this.customersList = data;
-    });
-    setTimeout(() => {
-      this.dtTrigger.next();
-    }, 1000)
-    // $(document).ready(function() {
-    //   $('#customertable').DataTable();
-    // } );
+  //Generate datatable 
+  datatable_generate() {
+    var customerTable = $('#customerTable').DataTable();
+    var customerTable_info = customerTable.page.info();
+
+    if (customerTable_info.pages == 1) {
+      customerTable.destroy();
+      $('#customerTable').DataTable({
+        "paging": false
+      });
+    }
   }
+
+  ngOnInit() {
+    this.staffService.get_customersList().subscribe(
+      res_data => {
+        this.customersList = res_data.body as Customer;
+      },
+      err => {
+        console.log("Error: " + err.status + " " + err.error.message);
+        sessionStorage.setItem('error', JSON.stringify(err));
+      },
+      () => {
+        setTimeout(() => {
+          // this.dtTrigger.next();
+          this.datatable_generate();
+        })
+      });
+  }
+
   ngAfterViewInit(): void {
     // this.dtTrigger.next();
   }
+
   ngOnDestroy(): void {
-    this.dtTrigger.unsubscribe();
+    // this.dtTrigger.unsubscribe();
   }
 }

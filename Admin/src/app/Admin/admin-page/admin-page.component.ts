@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { api } from '../../_api/apiUrl';
 import { formatDate } from "@angular/common";
 
-interface MoneyStatisic {
-  dateDay: Date;
-}
 //services
 import { StatisticalService } from '../../_services/statistical.service';
 import { UserService } from '../../_services/user.service';
@@ -17,9 +13,8 @@ import { UserService } from '../../_services/user.service';
 })
 export class AdminPageComponent implements OnInit {
   money_statistics = [];
-  // money_statistics: MoneyStatisic;
   product_statistics = [];
-  bill_statistics = [];
+  // bill_statistics = [];
 
   public productChartOptions = {
     scaleShowVerticalLines: false,
@@ -40,6 +35,7 @@ export class AdminPageComponent implements OnInit {
     },
     maintainAspectRatio: false
   };
+
   public moneyChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true,
@@ -57,6 +53,7 @@ export class AdminPageComponent implements OnInit {
       ]
     }
   };
+
   public moneyChartLabels = [];
   public productChartLabels = [];
   public billChartLabels = [];
@@ -67,6 +64,7 @@ export class AdminPageComponent implements OnInit {
     { data: [0], label: 'Total Orders' },
     { data: [0], label: 'Total Bills' }
   ];
+
   public moneyChartData = [{ data: [0], label: 'Total Money' }];
   // public barChartData3 = [{ data: [0], label: 'Total Bills' }];
 
@@ -80,20 +78,33 @@ export class AdminPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.statisticalService.money_statistics.subscribe(data => {
-      this.money_statistics = data;
-      this.isMoneyDataAvailable = true;
-      setTimeout(() => {
-        this.create_moneyChart(data);
+    //Get money statistic and generate chart
+    this.statisticalService.get_moneyStatistics().subscribe(
+      res_data => {
+        this.money_statistics = res_data.body as any[];
+        this.isMoneyDataAvailable = true;
+        setTimeout(() => {
+          this.create_moneyChart(res_data.body as any[]);
+        })
+      },
+      err => {
+        console.log("Error: " + err.status + " " + err.error.text);
+        sessionStorage.setItem('error', JSON.stringify(err));
       })
-    })
-    this.statisticalService.product_statistics.subscribe(data => {
-      this.product_statistics = data;
-      this.isProductDataAvailable = true;
-      setTimeout(() => {
-        this.create_productChart(data);
-      })
-    });
+
+    //Get products statistic and generate chart
+    this.statisticalService.get_productStatistics().subscribe(
+      res_data => {
+        this.product_statistics = res_data.body as any[];
+        this.isProductDataAvailable = true;
+        setTimeout(() => {
+          this.create_productChart(res_data.body as any[]);
+        })
+      },
+      err => {
+        console.log("Error: " + err.status + " " + err.error.text);
+        sessionStorage.setItem('error', JSON.stringify(err));
+      });
 
     // this.bill_statistics = this.statisticalService.get_billData();
     // this.money_statistics.sort(function (a, b) {
@@ -102,6 +113,8 @@ export class AdminPageComponent implements OnInit {
 
     // this.create_billChart(this.bill_statistics);
   }
+
+  //Create chart from money statistic data
   create_moneyChart(moneyData: any[]) {
     var money_data = [];
     for (let i = 0; i < moneyData.length; i++) {
@@ -115,6 +128,8 @@ export class AdminPageComponent implements OnInit {
       }
     ]
   }
+
+  //Create chart from product statistic data
   create_productChart(productData: any[]) {
     if (productData) {
       var product_data1 = [];

@@ -9,10 +9,10 @@
           <nav class="side-navbar">
             <!-- Sidebar Header-->
             <div class="sidebar-header d-flex align-items-center">
-              <div class="avatar"><img src={{userService.get_userAvatar()}} onError="this.src='../../../../assets/images/avatar/default-avatar.jpg'" alt="..." class="img-fluid rounded-circle"></div>
+              <div class="avatar"><img src={{userService?.get_userAvatar()}} onError="this.src='../../../../assets/images/avatar/default-avatar.jpg'" alt="..." class="img-fluid rounded-circle"></div>
               <div class="title">
-                  <a href="profile"><h1 class="h4">{{userService.get_userInfo().username}}</h1></a>
-                  <p><span *ngIf="userService.get_userInfo().role=='nhanvien'">Staff</span><span *ngIf="userService.get_userInfo().role=='Admin'">Admin</span></p>
+                  <a href="profile"><h1 class="h4">{{userService.get_userInfo()?.username}}</h1></a>
+                  <p><span *ngIf="userService.get_userInfo()?.role=='nhanvien'">Staff</span><span *ngIf="userService.get_userInfo()?.role=='Admin'">Admin</span></p>
                 </div>
             </div>
             <!-- Sidebar Navidation Menus--><span class="heading">Statistic</span>
@@ -73,15 +73,14 @@
                           <h3 class="h4">Customers list</h3>
                         </div>
                         <div class="card-body">
-                          <!-- <input class="form-control" id="SearchInput" type="text" placeholder="Search.." (change)="seach($event)"> -->
                           <div class="table-responsive">
-                            <table datatable [dtTrigger]="dtTrigger" class="table" id="customertable">
-                              <thead>
+                            <table class="table table-striped" id="customerTable">
+                              <thead class="thead-light">
                                 <tr>
                                   <th class="text-center">#</th>
                                   <th class="text-center">Customer Name</th>
                                   <th class="text-center">Username</th>
-                                  <th class="text-center">Functions</th>
+                                  <th class="text-center">Actions</th>
                                 </tr>
                               </thead>
                               <tbody id="tableData">
@@ -89,7 +88,11 @@
                                   <th scope="row" class="align-middle text-center">{{i+1}}</th>
                                   <td class="align-middle text-center">{{customer.fullName}}</td>
                                   <td class="align-middle text-center">{{customer.username}}</td>
-                                  <td class="text-center"><button type="button" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Upgrade this user" (click)="upgrade(customer.username)"><i class="fa fa-angle-double-up"></i></button></td>
+                                  <td class="text-center">
+                                    <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Upgrade this user" (click)="upgrade(customer.username)">
+                                      <i class="fa fa-angle-double-up"></i>
+                                    </button>
+                                  </td>
                                 </tr>
                               </tbody>
                             </table>

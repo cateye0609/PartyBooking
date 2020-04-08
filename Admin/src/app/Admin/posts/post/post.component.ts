@@ -15,7 +15,7 @@ export class PostComponent implements OnInit {
 
   ngOnInit() { }
 
-  froalaOptions: Object = {
+  options: Object = {
     placeholderText: 'Edit your post here!',
     toolbarButtons: [
       ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript'],
@@ -34,6 +34,21 @@ export class PostComponent implements OnInit {
       '\'Times New Roman\',Times,serif': 'Times New Roman',
       'Verdana,Geneva,sans-serif': 'Verdana',
     },
+    // // disable image upload (use hotlinking)
+    // imageUpload: false,
+    // Set the image upload parameter.
+    requestHeaders: {
+      Authorization: '18ae6ee9422882c8a5beeae6e30c35a46b42607e'
+    },
+    imageUploadParam: 'image',
+    // Set the image upload URL.
+    imageUploadURL: '	https://api.imgur.com/3/image',
+    // Set request type.
+    imageUploadMethod: 'POST',
+    // Set max image size to 5MB.
+    imageMaxSize: 5 * 1024 * 1024,
+    // Allow to upload PNG and JPG.
+    imageAllowedTypes: ['jpeg', 'jpg', 'png'],
   }
 
   createClicked(content: {

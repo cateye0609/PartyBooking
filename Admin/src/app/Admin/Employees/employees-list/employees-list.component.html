@@ -7,10 +7,10 @@
           <nav class="side-navbar">
             <!-- Sidebar Header-->
             <div class="sidebar-header d-flex align-items-center">
-              <div class="avatar"><img src={{userService.get_userAvatar()}} onError="this.src='../assets/images/avatar/default-avatar.jpg'" alt="..." class="img-fluid rounded-circle"></div>
+              <div class="avatar"><img src={{userService?.get_userAvatar()}} onError="this.src='../assets/images/avatar/default-avatar.jpg'" alt="..." class="img-fluid rounded-circle"></div>
               <div class="title">
-                  <a href="profile"><h1 class="h4">{{userService.get_userInfo().username}}</h1></a>
-                  <p><span *ngIf="userService.get_userInfo().role=='nhanvien'">Staff</span><span *ngIf="userService.get_userInfo().role=='Admin'">Admin</span></p>
+                  <a href="profile"><h1 class="h4">{{userService.get_userInfo()?.username}}</h1></a>
+                  <p><span *ngIf="userService.get_userInfo()?.role=='nhanvien'">Staff</span><span *ngIf="userService.get_userInfo()?.role=='Admin'">Admin</span></p>
                 </div>
             </div>
             <!-- Sidebar Navidation Menus--><span class="heading">Statistic</span>
@@ -72,13 +72,13 @@
                         </div>
                         <div class="card-body">
                           <div class="table-responsive">
-                            <table datatable [dtTrigger]="dtTrigger" class="table">
-                              <thead>
+                            <table id="employeTable" class="table table-bordered table-striped employee-table">
+                              <thead class="thead-dark">
                                 <tr>
                                   <th class="text-center">#</th>
                                   <th class="text-center">Employee Name</th>
                                   <th class="text-center">Username</th>
-                                  <th class="text-center">Functions</th>
+                                  <th class="text-center">Actions</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -86,7 +86,11 @@
                                   <th scope="row" class="align-middle text-center">{{i+1}}</th>
                                   <td class="align-middle text-center">{{staff.fullName}}</td>
                                   <td class="align-middle text-center">{{staff.username}}</td>
-                                  <td class="text-center"><button type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Downgrade this user" (click)="downgrade(staff.username)"><i class="fa fa-times" aria-hidden="true"></i></button></td>
+                                  <td class="text-center">
+                                    <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Downgrade this user" (click)="downgrade(staff.username)">
+                                      <i class="fa fa-angle-double-down" aria-hidden="true"></i>
+                                    </button>
+                                  </td>
                                 </tr>
                               </tbody>
                             </table>

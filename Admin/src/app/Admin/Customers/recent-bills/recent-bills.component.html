@@ -6,10 +6,10 @@
             <nav class="side-navbar">
                 <!-- Sidebar Header-->
                 <div class="sidebar-header d-flex align-items-center">
-                <div class="avatar"><img src={{userService.get_userAvatar()}} onError="this.src='../assets/images/avatar/default-avatar.jpg'" alt="..." class="img-fluid rounded-circle"></div>
+                <div class="avatar"><img src={{userService?.get_userAvatar()}} onError="this.src='../assets/images/avatar/default-avatar.jpg'" alt="..." class="img-fluid rounded-circle"></div>
                 <div class="title">
-                    <a href="profile"><h1 class="h4">{{userService.get_userInfo().username}}</h1></a>
-                    <p><span *ngIf="userService.get_userInfo().role=='nhanvien'">Staff</span><span *ngIf="userService.get_userInfo().role=='Admin'">Admin</span></p>
+                    <a href="profile"><h1 class="h4">{{userService.get_userInfo()?.username}}</h1></a>
+                    <p><span *ngIf="userService.get_userInfo()?.role=='nhanvien'">Staff</span><span *ngIf="userService.get_userInfo()?.role=='Admin'">Admin</span></p>
                 </div>
                 </div>
                 <!-- Sidebar Navidation Menus--><span class="heading">Statistic</span>
@@ -71,7 +71,7 @@
                             </div>
                             <div class="card-body">
                             <div class="table-responsive">
-                                <table datatable [dtTrigger]="dtTrigger" class="table" id="billtable">
+                                <table class="table table-striped" id="recentbillTable">
                                 <thead>
                                     <tr>
                                         <th scope="col" class="text-center">#</th>
@@ -81,7 +81,7 @@
                                         <th scope="col" class="text-center">Num of tables</th>
                                         <th scope="col" class="text-center">Total</th>
                                         <th scope="col" class="text-center">Status</th>
-                                        <th scope="col" class="text-center">Functions</th>
+                                        <th scope="col" class="text-center">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -93,7 +93,11 @@
                                         <td class="align-middle text-center">{{bill.numbertable}}</td>
                                         <td class="align-middle text-center">{{bill.totalMoney | number}}</td>
                                         <td class="align-middle text-center"><span *ngIf="bill.userpayment!=null">Paid</span><span *ngIf="bill.userpayment==null">Unpaid</span></td>
-                                        <td [hidden]="bill.userpayment!=null" class="text-center"><button type="button" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Pay this bill" (click)="pay(bill._id)"><i class="fa fa-usd"></i></button><span class="tab-space"></span><button type="button" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Delete this bill" (click)="delete_bill(bill._id)"><i class="fa fa-trash"></i></button></td>
+                                        <td class="text-center">
+                                            <button [style.visibility]="bill.userpayment!=null ? 'hidden' : 'visible'" type="button" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Pay this bill" (click)="pay(bill._id)"><i class="fa fa-usd"></i></button>
+                                            <span [style.visibility]="bill.userpayment!=null ? 'hidden' : 'visible'" class="tab-space"></span>
+                                            <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Delete this bill" (click)="delete_bill(bill._id)"><i class="fa fa-trash"></i></button>
+                                        </td>
                                         <!-- Cart Detail Modal-->
                                         <div class="modal fade" id="CartDetailModal" tabindex="-1" role="dialog" aria-labelledby="CartDetailModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
