@@ -47,15 +47,25 @@ export class UserCheckoutComponent implements OnInit {
       )
     }
     let body = `lishDishs=${JSON.stringify(item_ordered)}&numbertable=${this.numOfTable}&dateParty=${this.deliveryDate}&discount="0"`;
-    console.log(body);
     this.http.post(api.orderConfirm, body, { headers: headers, observe: 'response' }).subscribe(res_data => {
       sessionStorage.setItem('response_body', JSON.stringify(res_data.body));
       alert("Order success!");
       localStorage.removeItem('cart');
-      this.router.navigate(['/cart']);
+      sessionStorage.setItem('current_receipt', JSON.stringify({
+        items: this.items,
+        numOfTable: this.numOfTable,
+        dateParty: this.deliveryDate,
+        total_price: this.total
+      }))
+      this.router.navigate(['/receipt']);
     },
       err => {
-        alert("Error: " + err.status);
+        console.log(err);
+        if (err.status == 400) {
+          alert('Please fill all the field with valid value!');
+        } else {
+          alert(err.status);
+        }
         sessionStorage.setItem('error', JSON.stringify(err));
       })
   }
