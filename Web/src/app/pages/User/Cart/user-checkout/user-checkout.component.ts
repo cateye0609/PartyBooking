@@ -7,6 +7,8 @@ import { Item } from '../../../../_models/item.model';
 import { ProductService } from '../../../../_services/product.service';
 import { api } from '../../../../_api/apiUrl'
 
+declare var toastr;
+
 @Component({
   selector: 'app-user-checkout',
   templateUrl: './user-checkout.component.html',
@@ -49,7 +51,7 @@ export class UserCheckoutComponent implements OnInit {
     let body = `lishDishs=${JSON.stringify(item_ordered)}&numbertable=${this.numOfTable}&dateParty=${this.deliveryDate}&discount="0"`;
     this.http.post(api.orderConfirm, body, { headers: headers, observe: 'response' }).subscribe(res_data => {
       sessionStorage.setItem('response_body', JSON.stringify(res_data.body));
-      alert("Order success!");
+      toastr.success("Order success!");
       localStorage.removeItem('cart');
       sessionStorage.setItem('current_receipt', JSON.stringify({
         items: this.items,
@@ -62,9 +64,9 @@ export class UserCheckoutComponent implements OnInit {
       err => {
         console.log(err);
         if (err.status == 400) {
-          alert('Please fill all the field with valid value!');
+          toastr.warning('Please fill all the field with valid value!');
         } else {
-          alert(err.status);
+          toastr.error("Error: " + err.status + " " + err.error.message);
         }
         sessionStorage.setItem('error', JSON.stringify(err));
       })
