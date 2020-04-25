@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { StripeService, Elements, Element as StripeElement, ElementsOptions } from "ngx-stripe";
@@ -6,11 +6,11 @@ import { StripeService, Elements, Element as StripeElement, ElementsOptions } fr
 declare var toastr;
 
 @Component({
-  selector: 'app-payment',
-  templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.css']
+  selector: 'app-payment-info',
+  templateUrl: './payment-info.component.html',
+  styleUrls: ['./payment-info.component.css']
 })
-export class PaymentComponent implements OnInit {
+export class PaymentInfoComponent implements OnInit {
   errorText: string;
   error: boolean = false;
 
