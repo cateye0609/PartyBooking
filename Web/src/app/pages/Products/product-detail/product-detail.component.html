@@ -93,7 +93,7 @@
             </div>
         </div>
         <h6 #review class="sub-header">Dish reviews</h6>
-        <app-product-rating [productId]="product_data?._id" [productRating]="product_ratings"></app-product-rating>
+        <app-product-rating [productId]="product_data?._id" [productRating]="product_ratings" *ngIf="product_ratings"></app-product-rating>
     </div>
     <app-footer></app-footer>
 </body>

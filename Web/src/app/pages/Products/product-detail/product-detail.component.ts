@@ -53,7 +53,6 @@ export class ProductDetailComponent implements OnInit {
     this.productService.get_dishRating(dish_id, 1).subscribe(
       res => {
         this.product_ratings = res.data as Dish_rating;
-        console.log(this.product_ratings);
       },
       err => {
         console.log("Error: " + err.error.message);
@@ -81,7 +80,6 @@ export class ProductDetailComponent implements OnInit {
         this.suggest_list.push(this.products_list[i]);
       }
     }
-    console.log(this.suggest_list);
   }
 
   // Thay đổi số lượng sản phẩm
