@@ -62,7 +62,7 @@ export class ProductDetailComponent implements OnInit {
   }
   // Lấy danh sách sản phẩm tương tự
   get_suggestList(category: string) {
-    this.productService.get_category(category, 1).subscribe(
+    this.productService.get_dish_by_category(category, 1).subscribe(
       res => {
         this.suggest_list = res.data.value as Product[];
       },
