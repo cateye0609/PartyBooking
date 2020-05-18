@@ -13,8 +13,6 @@ import { MoneyStatistic, DishStatistic } from '../../_models/statistic.model';
   styleUrls: ['./admin-page.component.css']
 })
 export class AdminPageComponent implements OnInit {
-  money_statistics = [];
-  product_statistics = [];
   // bill_statistics = [];
 
   public productChartOptions = {
@@ -86,7 +84,6 @@ export class AdminPageComponent implements OnInit {
   get_statistic_money() {
     this.statisticalService.get_moneyStatistics().subscribe(
       res => {
-        this.money_statistics = res.data as any[];
         this.isMoneyDataAvailable = true;
         setTimeout(() => {
           this.create_moneyChart(res.data as MoneyStatistic[]);
@@ -102,10 +99,9 @@ export class AdminPageComponent implements OnInit {
   get_statistic_dish() {
     this.statisticalService.get_productStatistics().subscribe(
       res => {
-        this.product_statistics = res.data as any[];
         this.isProductDataAvailable = true;
         setTimeout(() => {
-          this.create_productChart(res.data as any[]);
+          this.create_productChart(res.data as DishStatistic[]);
         })
       },
       err => {
@@ -130,13 +126,13 @@ export class AdminPageComponent implements OnInit {
   }
 
   // Tạo biểu đồ từ Thống kê món ăn được gọi trong 1 ngày
-  create_productChart(productData: any[]) {
+  create_productChart(productData: DishStatistic[]) {
     if (productData) {
       var product_data1 = [];
       var product_data2 = [];
       for (let i = 0; i < productData.length; i++) {
-        product_data1.push(productData[i].count_of_bill);
-        product_data2.push(productData[i].totalorderbill);
+        product_data1.push(productData[i].count);
+        product_data2.push(productData[i].total_plate);
 
         // this.productChartLabels = [];
         this.productChartLabels.push(productData[i].name);

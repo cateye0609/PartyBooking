@@ -72,15 +72,15 @@
                                         <tr *ngFor="let bill of bill_info; let i = index" data-toggle="modal"
                                             data-target="#CartDetailModal" (click)="itemClicked(bill)">
                                             <th scope="row" class="align-middle">{{i+1}}</th>
-                                            <td class="align-middle">{{bill.username}}</td>
-                                            <td class="align-middle">{{bill.createAt | date:'dd-MM-yyyy'}}</td>
-                                            <td class="align-middle">{{bill.dateParty | date:'dd-MM-yyyy, HH:mm'}}</td>
-                                            <td class="align-middle text-center">{{bill.numbertable}}</td>
-                                            <td class="align-middle">{{bill.totalMoney | number}}</td>
+                                            <td class="align-middle">{{bill?.customer}}</td>
+                                            <td class="align-middle">{{bill?.create_at | date:'dd-MM-yyyy'}}</td>
+                                            <td class="align-middle">{{bill?.date_party | date:'dd-MM-yyyy, HH:mm'}}</td>
+                                            <td class="align-middle text-center">{{bill?.table}}</td>
+                                            <td class="align-middle">{{bill?.total | number}}</td>
                                             <td class="align-middle"><span
-                                                    *ngIf="bill.userpayment!=null">Paid</span><span
-                                                    *ngIf="bill.userpayment==null">Unpaid</span></td>
-                                            <td *ngIf="bill.userpayment==null"><button type="button"
+                                                    *ngIf="bill?.payment_status==1">Paid</span><span
+                                                    *ngIf="bill?.payment_status==0">Unpaid</span></td>
+                                            <td *ngIf="bill?.payment_status==0"><button type="button"
                                                     class="btn btn-outline-primary btn-sm" data-toggle="tooltip"
                                                     data-placement="top" title="Pay this bill"
                                                     (click)="pay(bill._id)"><i class="fa fa-usd"></i></button><span
@@ -110,7 +110,7 @@
                                                                         <th scope="col">#</th>
                                                                         <th scope="col">Name</th>
                                                                         <th scope="col">Price</th>
-                                                                        <th scope="col">Quantity</th>
+                                                                        <th scope="col" class="text-center">Quantity</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -118,9 +118,9 @@
                                                                         *ngFor="let itemDetail of bill_detail; let i = index">
                                                                         <th scope="row">{{i+1}}</th>
                                                                         <td>{{itemDetail.name}}</td>
-                                                                        <td>{{productService.find(itemDetail._id).price | number}}
+                                                                        <td>{{itemDetail.price | number}}
                                                                         </td>
-                                                                        <td>{{itemDetail.numberDish | number}}</td>
+                                                                        <td class="text-center">{{itemDetail.count | number}}</td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>

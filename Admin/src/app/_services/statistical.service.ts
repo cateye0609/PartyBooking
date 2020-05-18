@@ -24,9 +24,4 @@ export class StatisticalService {
     get_productStatistics() {
         return this.http.get<ApiResponse>(api.productStatistics, { headers: this.headers })
     }
-
-    // Lấy số liệu thống kê đơn hàng
-    get_recentBills() {
-        return this.http.get<ApiResponse>(api.billStatistics, { headers: this.headers })
-    }
 }

@@ -47,8 +47,15 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: 'list', component: CustomersListComponent },
+    ],
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'bills',
+    children: [
+      { path: '', redirectTo: 'pay', pathMatch: 'full' },
       { path: 'pay', component: PayComponent },
-      { path: 'recent-bill', component: RecentBillsComponent }
+      { path: 'recent-bill', component: RecentBillsComponent },
     ],
     canActivate: [AuthGuard]
   },

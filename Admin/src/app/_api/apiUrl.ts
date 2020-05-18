@@ -14,11 +14,10 @@ export const api = {
 
     productStatistics: `${apiUrl}/product/statistic_dish`,      // Thống kê món ăn được gọi trong 1 ngày
     moneyStatistics: `${apiUrl}/product/statistic_money`,       // Thống kê tổng hóa đơn theo 7 ngày gần nhất
-    billStatistics: `${apiUrl}/product/findallbill`,            //  
 
-    findbill: `${apiUrl}/product/findbill`,                 //find user bill info
-    pay: `${apiUrl}/product/pay`,                           //pay bill
-    delete_bill: `${apiUrl}/product/deletebill`,            //delete bill
+    get_bills_list: `${apiUrl}/product/bill`,                   // Lấy danh sách hóa đơn
+    pay_bill: `${apiUrl}/product/payment`,                      // Thanh toán đơn hàng
+    delete_bill: `${apiUrl}/product/deletebill`,                // Xóa đơn hàng
 
     add_dish: `${apiUrl}/product/dish`,                     // Thêm món ăn mới
     get_dishList: `${apiUrl}/product/dishs`,                // Lấy danh sách món ăn
