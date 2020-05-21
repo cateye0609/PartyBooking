@@ -9,6 +9,7 @@ import { ApiResponse } from '../_models/response.model';
 export class PaymentService {
 
     headers = new HttpHeaders({
+        'Content-type': 'application/x-www-form-urlencoded',
         'Authorization': localStorage.getItem('token')
     })
     constructor(
@@ -17,11 +18,8 @@ export class PaymentService {
 
     //Thanh toán đơn hàng
     pay_bill(bill_id: string) {
-        let headers = new HttpHeaders({
-            // 'Content-type': 'application/x-www-form-urlencoded',
-            'Authorization': localStorage.getItem('token')
-        })
-        this.http.post<ApiResponse>(api.pay_bill + "/" + bill_id, { headers: headers }).subscribe(
+        let body;
+        this.http.post<ApiResponse>(api.pay_bill + "/" + bill_id, body, { headers: this.headers }).subscribe(
             res => {
                 sessionStorage.setItem('response', JSON.stringify(res));
                 alert("Paid success!");
@@ -36,7 +34,7 @@ export class PaymentService {
     }
 
     //Xóa đơn hàng
-    delete_bill(bill_id) {
+    delete_bill(bill_id: string) {
         const option = {
             headers: this.headers,
             body: {
@@ -58,19 +56,11 @@ export class PaymentService {
 
     // Lấy danh sách tất cả hóa đơn
     get_bills_list(page: number) {
-        let headers = new HttpHeaders({
-            'Content-type': 'application/x-www-form-urlencoded',
-            'Authorization': localStorage.getItem('token')
-        })
-        return this.http.get<ApiResponse>(api.get_bills_list + "?page=" + page, { headers: headers });
+        return this.http.get<ApiResponse>(api.get_bills_list + "?page=" + page, { headers: this.headers });
     }
 
     // Lấy danh sách hóa đơn theo tên khách hàng
     get_bills_by_username(username: string) {
-        let headers = new HttpHeaders({
-            'Content-type': 'application/x-www-form-urlencoded',
-            'Authorization': localStorage.getItem('token')
-        })
-        return this.http.get<ApiResponse>(api.get_bills_list + "/" + username, { headers: headers });
+        return this.http.get<ApiResponse>(api.get_bills_list + "/" + username, { headers: this.headers });
     }
 }

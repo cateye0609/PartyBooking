@@ -50,7 +50,6 @@ export class ProductsListComponent implements AfterViewInit, OnDestroy, OnInit {
   delete_clicked(id: string, name: string) {
     if (confirm("Are you sure to delete this?\n" + name)) {
       this.product_delete(id);
-      console.log(id);
     }
   }
 

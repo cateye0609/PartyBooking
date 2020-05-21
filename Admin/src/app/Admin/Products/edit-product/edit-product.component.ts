@@ -55,7 +55,6 @@ export class EditProductComponent implements OnInit {
         this.productService.update_dish(body).subscribe(
           res => {
             sessionStorage.setItem('response', JSON.stringify(res));
-            console.log(res);
             alert("Edit product success");
             this.router.navigate(['/products/list']);
           },
@@ -71,8 +70,4 @@ export class EditProductComponent implements OnInit {
   fileChanged(event: any) {
     this.product_imgs_files = event.target.files;
   }
-  // fileChanged(event: any) {
-  //   // this.imgArr.push(event.target.files);
-  //   this.imgArr = event.target.files;
-  // }
 }

@@ -2,7 +2,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
 import { AppRoutingModule } from './app-routing.module';
@@ -26,7 +25,6 @@ import { PaymentService } from './_services/payment.service';
 //Components
 import { AppComponent } from './app.component';
 import { UserloginComponent } from './User/userlogin/userlogin.component';
-import { UserregisterComponent } from './User/userregister/userregister.component';
 import { AdminPageComponent } from './Admin/admin-page/admin-page.component';
 import { ProductsListComponent } from './Admin/Products/products-list/products-list.component';
 import { AddProductsComponent } from './Admin/Products/add-products/add-products.component';
@@ -47,7 +45,6 @@ import { SidebarComponent } from './components/commons/sidebar/sidebar.component
   declarations: [
     AppComponent,
     UserloginComponent,
-    UserregisterComponent,
     AdminPageComponent,
     ProductsListComponent,
     AddProductsComponent,

@@ -1,6 +1,6 @@
 export const apiUrl = "http://139.180.131.30:3000";
 export const api = {
-    signin: `${apiUrl}/user/signin`,                            // Đăng nhập
+    signin: `${apiUrl}/user/sign_admin`,                        // Đăng nhập
     signout: `${apiUrl}/user/signout`,                          // Đăng xuất
     signup: `${apiUrl}/user/signup`,                            // Đăng ký
 
@@ -12,19 +12,18 @@ export const api = {
     get_customerList: `${apiUrl}/user/customers`,               // Lấy danh sách khách hàng
     get_staffList: `${apiUrl}/user/staffs`,                     // Lấy danh sách nhân viên
 
-    productStatistics: `${apiUrl}/product/statistic_dish`,      // Thống kê món ăn được gọi trong 1 ngày
-    moneyStatistics: `${apiUrl}/product/statistic_money`,       // Thống kê tổng hóa đơn theo 7 ngày gần nhất
+    productStatistics: `${apiUrl}/product/statistic_dish`,      // Thống kê món ăn được gọi trong 1 ngày/tháng/tuần
+    moneyStatistics: `${apiUrl}/product/statistic_money`,       // Thống kê tổng hóa đơn theo 7 lần gần nhất
+    customerStatistics: `${apiUrl}/product/statistic_customer`, // Thống kê tiền khách hàng thanh toán trong 1 ngày/tháng/tuần
 
     get_bills_list: `${apiUrl}/product/bill`,                   // Lấy danh sách hóa đơn
     pay_bill: `${apiUrl}/product/payment`,                      // Thanh toán đơn hàng
     delete_bill: `${apiUrl}/product/deletebill`,                // Xóa đơn hàng
 
-    add_dish: `${apiUrl}/product/dish`,                     // Thêm món ăn mới
-    get_dishList: `${apiUrl}/product/dishs`,                // Lấy danh sách món ăn
-    update_dish: `${apiUrl}/product/dish`,                  // Cập nhật món ăn có sẵn
-    deleteDish: `${apiUrl}/product/deletedish`,             // delete existed dish
+    add_dish: `${apiUrl}/product/dish`,                         // Thêm món ăn mới
+    get_dishList: `${apiUrl}/product/dishs`,                    // Lấy danh sách món ăn
+    update_dish: `${apiUrl}/product/dish`,                      // Cập nhật món ăn có sẵn
+    deleteDish: `${apiUrl}/product/deletedish`,                 // delete existed dish
 
-    orderConfirm: `${apiUrl}/product/book`,                 //confirm order
-
-    upload_image: `${apiUrl}/product/upload_image`,         // Upload ảnh
+    upload_image: `${apiUrl}/product/upload_image`,             // Upload ảnh
 };
