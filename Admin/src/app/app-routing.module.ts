@@ -16,6 +16,8 @@ import { CustomersListComponent } from './Admin/Customers/customers-list/custome
 import { PayComponent } from './Admin/Customers/pay/pay.component';
 import { RecentBillsComponent } from './Admin/Customers/recent-bills/recent-bills.component';
 import { PostComponent } from './Admin/posts/post/post.component';
+import { PostsListComponent } from './Admin/posts/posts-list/posts-list.component';
+import { PostsEditComponent } from './Admin/posts/posts-edit/posts-edit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -63,7 +65,9 @@ const routes: Routes = [
     path: 'post',
     children: [
       { path: '', redirectTo: 'add', pathMatch: 'full' },
-      { path: 'create', component: PostComponent }
+      { path: 'create', component: PostComponent },
+      { path: 'list', component: PostsListComponent },
+      { path: 'edit/:id', component: PostsEditComponent }
     ],
     canActivate: [AuthGuard]
   },
