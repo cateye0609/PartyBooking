@@ -16,6 +16,9 @@ declare var toastr;
   styleUrls: ['./user-cart-info.component.css']
 })
 export class UserCartInfoComponent implements OnInit {
+  total_pages: number;
+  current_index: number = 1;
+
   checkout_session_id: string;
   userData: User;
   cart_history: Bill[] = [];
@@ -39,6 +42,7 @@ export class UserCartInfoComponent implements OnInit {
     this.userService.get_cartHistory(page).subscribe(
       res => {
         this.cart_history = res.data.value as Bill[];
+        this.total_pages = res.data.total_page;
       },
       err => {
         toastr.error("Error: " + err.error.message);
@@ -79,5 +83,13 @@ export class UserCartInfoComponent implements OnInit {
         sessionStorage.setItem('error', JSON.stringify(err));
       }
     )
+  }
+
+  // Đổi trang
+  change_page(page: number) {
+    if (page > 0 && page <= this.total_pages) {
+      this.get_cartHistory(page);
+      this.current_index = page;
+    }
   }
 }
