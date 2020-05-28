@@ -17,7 +17,6 @@ declare var toastr;
 })
 export class UserCartInfoComponent implements OnInit {
   total_pages: number;
-  current_index: number = 1;
 
   checkout_session_id: string;
   userData: User;
@@ -83,13 +82,5 @@ export class UserCartInfoComponent implements OnInit {
         sessionStorage.setItem('error', JSON.stringify(err));
       }
     )
-  }
-
-  // Đổi trang
-  change_page(page: number) {
-    if (page > 0 && page <= this.total_pages) {
-      this.get_cartHistory(page);
-      this.current_index = page;
-    }
   }
 }

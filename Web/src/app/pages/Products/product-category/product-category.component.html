@@ -44,24 +44,7 @@
                     </div>
                 </div>
                 <p class="text-center" *ngIf="!filtered_products.length">There is no product in this category.</p>
-                <div class="pagination-bar pb-0 pt-3 d-flex justify-content-center" *ngIf="total_pages > 1">
-                    <!-- <jw-pagination [items]="filtered_products" (changePage)="onChangePage($event)"></jw-pagination> -->
-                    <div class="pagination">
-                        <ul>
-                          <a (click)="change_page(current_index - 1)"><li><</li></a>
-                          <!-- <a class="active" href="#"><li>1</li></a>
-                          <a href="#"><li>2</li></a>
-                          <a href="#"><li>3</li></a>
-                          <a href="#"><li>4</li></a>
-                          <a href="#"><li>5</li></a>
-                          <a href="#"><li>6</li></a> -->
-                          <a *ngFor="let item of [].constructor(total_pages); let currentIndex=index" 
-                            (click)="change_page(currentIndex+1)" 
-                            [ngClass]="{active: currentIndex+1 == current_index}">{{currentIndex + 1}}</a>
-                          <a (click)="change_page(current_index + 1)"><li>></li></a>
-                        </ul>
-                    </div>
-                </div>
+                <pagination [total_pages]="total_pages" (onChange)="get_dishes_byCate(this.cat_filter, $event)"></pagination>
             </div>
         </div>
     </div>
