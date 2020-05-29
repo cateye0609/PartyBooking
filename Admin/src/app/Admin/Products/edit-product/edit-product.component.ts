@@ -39,7 +39,7 @@ export class EditProductComponent implements OnInit {
       },
       err => {
         console.log("Error: " + err.error.message);
-        alert("Get dish info error!");
+        alert("Error while getting dish info!");
       }
     )
   }
@@ -47,7 +47,7 @@ export class EditProductComponent implements OnInit {
   update_confirm(data: {
     name: string;
     description: string;
-    type: string;
+    categories: string;
     price: number;
     discount: number;
   }) {
@@ -77,20 +77,20 @@ export class EditProductComponent implements OnInit {
   update_dish(data: {
     name: string;
     description: string;
-    type: string;
+    categories: string;
     price: number;
     discount: number;
   }) {
-    this.product_categories.push(data.type); // Push category vào mảng
-    let body = `_id=${this.product_id}&name=${data.name}&description=${data.description}&price=${JSON.stringify(this.product_categories)}&discount=${data.discount}&currency=vnd&categories=${JSON.stringify(data.type)}&image=${JSON.stringify(this.product_imgs_url)}&feature_image=${this.product_imgs_url[0]}`;
+    this.product_categories.push(data.categories); // Push category vào mảng
+    let body = `_id=${this.product_id}&name=${data.name}&description=${data.description}&price=${data.price}&discount=${data.discount}&currency=vnd&categories=${JSON.stringify(this.product_categories)}&image=${JSON.stringify(this.product_imgs_url)}&feature_image=${this.product_imgs_url[0]}`;
     this.productService.update_dish(body).subscribe(
       res => {
         alert("Edit product success");
-        window.location.reload();
+        // window.location.reload();
       },
       err => {
-        alert("Error: " + err.error.message);
-        sessionStorage.setItem('error', JSON.stringify(err));
+        alert("Error while update dish!");
+        console.log(`Error + ${err.error.message}`);
       }
     )
   }
