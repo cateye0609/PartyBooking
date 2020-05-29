@@ -29,4 +29,9 @@ export class StatisticalService {
     get_customerStatistics(type: string, payment_status: number) {
         return this.http.get<ApiResponse>(api.customerStatistics + `?type=${type}&payment_status=${payment_status}`, { headers: this.headers });
     }
+
+    // Thống kê số tiền nhân viên đã thanh toán
+    get_staffStatistics(type: string) {
+        return this.http.get<ApiResponse>(api.staffStatistics + `?type=${type}`, { headers: this.headers });
+    }
 }

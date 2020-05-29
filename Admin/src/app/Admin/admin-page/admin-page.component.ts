@@ -4,7 +4,7 @@ import { formatDate } from "@angular/common";
 //services
 import { StatisticalService } from '../../_services/statistical.service';
 // Models
-import { MoneyStatistic, DishStatistic, CustomerStatistic } from '../../_models/statistic.model';
+import { MoneyStatistic, DishStatistic, CustomerStatistic, StaffStatistic } from '../../_models/statistic.model';
 
 declare var $: any;
 
@@ -94,6 +94,7 @@ export class AdminPageComponent implements OnInit {
   public moneyChartLabels = [];
   public productChartLabels = [];
   public customerChartLabels = [];
+  public staffChartLabels = []
   public barChartType = 'bar';
   public pieChartType = 'pie';
   public lineChartType = 'line';
@@ -112,11 +113,16 @@ export class AdminPageComponent implements OnInit {
     { data: [0], label: 'Total Money', yAxisID: '' },
     { data: [0], label: 'Bill count', yAxisID: '' }
   ]
+  public staffChartData = [
+    { data: [0], label: 'Total Money', yAxisID: '' },
+    { data: [0], label: 'Bill count', yAxisID: '' }
+  ]
 
   // Biến kiểm tra xem data cho biểu đồ có hay chưa
   public isMoneyDataAvailable: boolean = false;
   public isProductDataAvailable: boolean = false;
   public isCustomerDataAvailable: boolean = false;
+  public isStaffDataAvailable: boolean = false;
 
   constructor(
     private statisticalService: StatisticalService,
@@ -124,6 +130,10 @@ export class AdminPageComponent implements OnInit {
 
   ngOnInit() {
     this.get_statistic_money();
+
+    this.product_range_changed('day');
+    this.customer_range_changed('day');
+    this.staff_range_changed('day');
   }
 
   // Lấy Thống kê tổng hóa đơn theo 7 ngày gần nhất và tạo biểu đồ tương ứng
@@ -137,7 +147,7 @@ export class AdminPageComponent implements OnInit {
       },
       err => {
         console.log("Error: " + err.error.message);
-        sessionStorage.setItem('error', JSON.stringify(err));
+        alert("Error while getting money statistic!");
       })
   }
 
@@ -212,13 +222,39 @@ export class AdminPageComponent implements OnInit {
     }
   }
 
+  create_staffChart(staffData: StaffStatistic[]) {
+    if (staffData) {
+      this.staffChartLabels = [];
+      let staff_bills_count: number[] = [];
+      let staff_totalmoney: number[] = [];
+      for (let i = 0; i < staffData.length; i++) {
+        staff_bills_count.push(staffData[i].count_bill);
+        staff_totalmoney.push(staffData[i].total_money);
+        this.staffChartLabels.push(staffData[i]._id);
+      }
+      ////
+      this.staffChartData = [
+        {
+          data: staff_bills_count,
+          label: 'Bills count',
+          yAxisID: 'y-axis-0'
+        },
+        {
+          data: staff_totalmoney,
+          label: 'Total money',
+          yAxisID: 'y-axis-1',
+        }
+      ]
+    }
+  }
+
   // Khi thay đổi phạm vi thống kê món ăn
-  product_range_changed(event: any) {
+  product_range_changed(value: string) {
     $('.chart-btn').on('click', function () {
-      $('#productBtns > .chart-btn').removeClass('active');
+      $('#productBtn > .chart-btn').removeClass('active');
       $(this).addClass('active');
     });
-    this.statisticalService.get_productStatistics(event.target.value).subscribe(
+    this.statisticalService.get_productStatistics(value).subscribe(
       res => {
         if (res.data.length > 0) {
           this.isProductDataAvailable = true;
@@ -232,18 +268,18 @@ export class AdminPageComponent implements OnInit {
       },
       err => {
         console.log("Error: " + err.error.message);
-        sessionStorage.setItem('error', JSON.stringify(err));
+        alert("Error while getting product statistic!");
       }
     )
   }
 
   // Khi thay đổi phạm vi thống kê khách hàng
-  customer_range_changed(event: any) {
+  customer_range_changed(value: string) {
     $('.chart-btn').on('click', function () {
-      $('#customerBtns > .chart-btn').removeClass('active');
+      $('#customerBtn > .chart-btn').removeClass('active');
       $(this).addClass('active');
     });
-    this.statisticalService.get_customerStatistics(event.target.value, null).subscribe(
+    this.statisticalService.get_customerStatistics(value, null).subscribe(
       res => {
         if (res.data.length > 0) {
           this.isCustomerDataAvailable = true;
@@ -257,7 +293,32 @@ export class AdminPageComponent implements OnInit {
       },
       err => {
         console.log("Error: " + err.error.message);
-        sessionStorage.setItem('error', JSON.stringify(err));
+        alert("Error while getting customer statistic!");
+      }
+    )
+  }
+
+  // Khi thay đổi phạm vi thống kê nhân viên
+  staff_range_changed(value: string) {
+    $('.chart-btn').on('click', function () {
+      $('#staffBtn > .chart-btn').removeClass('active');
+      $(this).addClass('active');
+    });
+    this.statisticalService.get_staffStatistics(value).subscribe(
+      res => {
+        if (res.data.length > 0) {
+          this.isStaffDataAvailable = true;
+        }
+        else {
+          this.isStaffDataAvailable = false;
+        }
+        setTimeout(() => {
+          this.create_staffChart(res.data as StaffStatistic[]);
+        })
+      },
+      err => {
+        console.log("Error: " + err.error.message);
+        alert("Error while getting staff statistic!");
       }
     )
   }
