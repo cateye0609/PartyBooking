@@ -9,3 +9,11 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.dark-grey-text {
+    color: #4f4f4f !important;
+}
+
+/* .dark-grey-text:hover, .dark-grey-text:focus {
+    color: #4f4f4f !important;
+} */

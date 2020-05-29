@@ -18,7 +18,7 @@ export class PaginationComponent implements OnInit {
 
   // Đổi trang
   changePage(page: number) {
-    if (page > 0 && page <= this.total_pages) {
+    if (page > 0 && page <= this.total_pages && page != this.current_index) {
       this.current_index = page;
       this.onChange.emit(this.current_index);
     }
