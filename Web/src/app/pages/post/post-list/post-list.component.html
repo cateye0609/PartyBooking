@@ -1,19 +1,19 @@
 <div class="main-wrapper">
   <!-- Header -->
   <app-header></app-header>
-  <!-- Loading -->
-  <div class="container" *ngIf="post_list.length < 1">
-    <div class="row">
-      <div class="col-md-6" *ngFor="let item of [].constructor(4)">
-        <div class="card mb-4 mt-4">
-          <card-loading></card-loading>
+  <!-- Main -->
+  <div class="container mt-1 pl-5 pr-5 pb-3">
+    <h4 class="font-weight-bold mb-4 mt-2">Posts list</h4>
+    <!-- Loading -->
+    <div *ngIf="post_list.length < 1">
+      <div class="row">
+        <div class="col-md-6" *ngFor="let item of [].constructor(4)">
+          <div class="card mb-4">
+            <card-loading></card-loading>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- Main -->
-  <div class="container mt-1 pl-5 pr-5">
-    <h4 class="font-weight-bold mb-4 mt-2">Posts list</h4>
     <!-- Posts list -->
     <div class="row">
       <div class="col-md-6" *ngFor="let post of post_list">
@@ -39,6 +39,7 @@
         </div>
       </div>
     </div>
+    <pagination [total_pages]="total_pages" (onChange)="get_posts_list($event)"></pagination>
   </div>
   <scroll-to-top></scroll-to-top>
   <!-- Footer -->

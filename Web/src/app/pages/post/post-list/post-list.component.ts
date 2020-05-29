@@ -9,7 +9,7 @@ declare var toastr;
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
-  styleUrls: ['./post-list.component.css']
+  styleUrls: ['./post-list.component.css'],
 })
 export class PostListComponent implements OnInit {
   post_list: Post[] = [];
@@ -28,18 +28,12 @@ export class PostListComponent implements OnInit {
     this.postService.get_posts_list(page).subscribe(
       res => {
         this.post_list = res.data.value as Post[];
+        this.total_pages = res.data.total_page;
       },
       err => {
         console.log("Error: " + err.error.message);
         toastr.error("Error loading posts list!");
       }
     )
-  }
-  // Đổi trang
-  change_page(page: number) {
-    if (page > 0 && page <= this.total_pages) {
-      this.get_posts_list(page);
-      this.current_index = page;
-    }
   }
 }

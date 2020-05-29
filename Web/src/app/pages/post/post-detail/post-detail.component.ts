@@ -29,14 +29,13 @@ export class PostDetailComponent implements OnInit {
       let post_id = params['id'];
       this.get_post(post_id);
     })
-
-    this.get_similar_posts();
   }
   // Lấy thông tin bài viết
   get_post(id: string) {
     this.postService.get_post(id).subscribe(
       res => {
         this.post = res.data as Post;
+        this.get_similar_posts(this.post.author);
       },
       err => {
         if (err.error.message == "Không tìm thấy Id bài viết") {
@@ -48,14 +47,15 @@ export class PostDetailComponent implements OnInit {
     )
   }
 
-  // Lấy danh sách bài viết tương tự
-  get_similar_posts() {
-    this.postService.get_posts_list(1).subscribe(
+  // Lấy danh sách bài viết cùng tác giả
+  get_similar_posts(name: string) {
+    this.postService.get_posts_list_byAuthor(name).subscribe(
       res => {
-        this.similar_posts = res.data.value as Post[];
+        this.similar_posts = res.data as Post[];
       },
       err => {
         console.log("Error: " + err.error.message);
+        toastr.error("Error loading similar posts!");
       }
     )
   }

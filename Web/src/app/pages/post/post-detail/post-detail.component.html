@@ -62,10 +62,10 @@
     <div class="col-md-4">
       <!-- Similar posts -->
       <div class="card mb-4">
-        <div class="card-header">Similar posts</div>
+        <div class="card-header">Same author's posts</div>
         <div class="card-body">
-          <ul class="list-unstyled" *ngFor="let post of similar_posts">
-            <li class="media side-content">
+          <ul class="list-unstyled" *ngFor="let post of similar_posts ; let i=index">
+            <li class="media side-content" *ngIf="i < 11">
               <img class="d-flex mr-3" width="70" height="70" src={{post?.feature_image}} alt="post_image">
               <div class="media-body">
                 <a [routerLink]="['/post/detail', post?._id]">
