@@ -12,11 +12,27 @@ a:hover {
 
 .post-feature {
     max-width: 100%;
-    max-height: 300px;
+    max-height: 400px;
     object-fit: cover;
 }
 
-.summary-text {
+.post-content-wrapper {
+    overflow: hidden;
+}
+
+.post-content img {
+    width: 100%!important;
+}
+
+.side-content .media-body h5 {
+    font-size: 1.1em;
+}
+
+.side-content .media-body span {
+    font-size: 0.9em;
+}
+
+.text-2line {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
