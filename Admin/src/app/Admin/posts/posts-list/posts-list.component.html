@@ -58,6 +58,7 @@
                       </tr>
                     </tbody>
                   </table>
+                  <pagination [total_pages]="total_pages" (onChange)="get_posts_list($event)"></pagination>
                 </div>
               </div>
             </div>

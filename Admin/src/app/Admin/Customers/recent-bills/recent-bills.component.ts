@@ -6,6 +6,7 @@ import { PaymentService } from '../../../_services/payment.service';
 import { ProductService } from '../../../_services/product.service';
 // Models
 import { Bill, Bill_item } from '../../../_models/bill.model';
+import { Subject } from 'rxjs';
 
 // declare jquery;
 declare var $: any;
@@ -17,12 +18,13 @@ declare var $: any;
 })
 
 export class RecentBillsComponent implements OnInit {
+  dtOptions: DataTables.Settings = {};
   total_pages: number;
   recent_bills: Bill[] = [];
   bill_detail: Bill_item[] = [];
   current_bill: Bill;
 
-  // dtTrigger: Subject<any> = new Subject();
+  dtTrigger: Subject<any> = new Subject(); 
 
   constructor(
     public statisticalService: StatisticalService,
@@ -33,6 +35,9 @@ export class RecentBillsComponent implements OnInit {
   ngOnInit() {
     // this.recent_billList = this.statisticalService.get_billData();
     this.get_recentBills(1);
+    this.dtOptions = {
+      "paging": false,
+    }
   }
 
   //Generate datatable 
@@ -79,6 +84,7 @@ export class RecentBillsComponent implements OnInit {
       res => {
         this.recent_bills = res.data.value as Bill[];
         this.total_pages = res.data.total_page;
+        this.dtTrigger.next();
       },
       err => {
         console.log("Error: " + err.error.text);

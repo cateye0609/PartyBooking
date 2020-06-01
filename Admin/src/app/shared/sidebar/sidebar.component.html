@@ -5,7 +5,7 @@
         <div class="avatar"><img src={{user_info?.avatar}} alt="avatar" class="img-fluid rounded-circle"></div>
         <div class="title">
             <a [routerLink]="['/profile']"><h1 class="h4">{{user_info?.username}}</h1></a>
-            <p><span *ngIf="user_info?.role=='2'">Staff</span><span *ngIf="user_info?.role=='3'">Admin</span></p>
+            <p><span *ngIf="user_info?.role==2">Staff</span><span *ngIf="user_info?.role==3">Admin</span></p>
         </div>
         </div>
         <!-- Sidebar Navidation Menus--><span class="heading">Statistic</span>
@@ -25,7 +25,7 @@
         <li><a href="#EmployeeDropdown" aria-expanded="false" data-toggle="collapse"><i class="fa fa-users" aria-hidden="true"></i>Employees </a>
             <ul id="EmployeeDropdown" class="collapse list-unstyled ">
             <li><a [routerLink]="['/employees/list']"><i class="fa fa-list"></i>Employees List</a></li>
-            <li><a [routerLink]="['/employees/add']"><i class="fa fa-plus"></i>Add Employee</a></li>
+            <!-- <li><a [routerLink]="['/employees/add']"><i class="fa fa-plus"></i>Add Employee</a></li> -->
             </ul>
         </li>
         <li><a href="#CustomerDropdown" aria-expanded="false" data-toggle="collapse"><i class="fa fa-user" aria-hidden="true"></i>Customers </a>

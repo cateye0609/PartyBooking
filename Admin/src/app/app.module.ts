@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartsModule } from 'ng2-charts';
 import 'froala-editor/js/plugins.pkgd.min.js'; // Import toàn bộ Froala plugin (Có thể import riêng lẻ từng cái)
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
-
+import { NgSelect2Module } from 'ng-select2'
 import { DatePipe } from '@angular/common';
 
 //Services
@@ -74,7 +74,8 @@ import { PaginationComponent } from './shared/pagination/pagination.component';
     ChartsModule,
     DataTablesModule,
     FroalaEditorModule.forRoot(),
-    FroalaViewModule.forRoot()
+    FroalaViewModule.forRoot(),
+    NgSelect2Module
   ],
   providers: [
     AuthenticationService,
