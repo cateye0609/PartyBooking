@@ -18,6 +18,7 @@ import { RecentBillsComponent } from './Admin/Customers/recent-bills/recent-bill
 import { PostComponent } from './Admin/posts/post/post.component';
 import { PostsListComponent } from './Admin/posts/posts-list/posts-list.component';
 import { PostsEditComponent } from './Admin/posts/posts-edit/posts-edit.component';
+import { AllBillsComponent } from './Admin/Customers/all-bills/all-bills.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -57,7 +58,8 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'pay', pathMatch: 'full' },
       { path: 'pay', component: PayComponent },
-      { path: 'recent-bill', component: RecentBillsComponent },
+      // { path: 'recent-bill', component: RecentBillsComponent },
+      { path: 'all-bills', component: AllBillsComponent }
     ],
     canActivate: [AuthGuard]
   },

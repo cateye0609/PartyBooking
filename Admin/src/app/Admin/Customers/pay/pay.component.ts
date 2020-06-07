@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+
 // Services
 import { PaymentService } from '../../../_services/payment.service';
 // Models
@@ -16,6 +18,7 @@ export class PayComponent implements OnInit {
 
   constructor(
     public paymentService: PaymentService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() { }
@@ -35,8 +38,8 @@ export class PayComponent implements OnInit {
         this.haveBill = true;
       },
       err => {
-        alert("Error: " + err.error.message);
-        sessionStorage.setItem('error', JSON.stringify(err));
+        this.toastr.error("Error while searching bills");
+        console.log("Error: " + err.error.message);
         this.haveBill = false;
       }
     )

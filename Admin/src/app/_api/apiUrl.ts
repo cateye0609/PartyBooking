@@ -22,8 +22,10 @@ export const api = {
 
     // Payment
     get_bills_list: `${apiUrl}/product/bill`,                   // Lấy danh sách hóa đơn
+    bill_confirm: `${apiUrl}/product/bill`,                     // Xác nhận đơn hàng
+    bill_cancel: `${apiUrl}/product/bill`,                      // Hủy đơn hàng
     pay_bill: `${apiUrl}/product/payment`,                      // Thanh toán đơn hàng
-    delete_bill: `${apiUrl}/product/deletebill`,                // Xóa đơn hàng
+    // delete_bill: `${apiUrl}/product/deletebill`,                // Xóa đơn hàng
 
     // Dishes
     add_dish: `${apiUrl}/product/dish`,                         // Thêm món ăn mới

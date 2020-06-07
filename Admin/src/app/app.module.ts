@@ -11,7 +11,7 @@ import 'froala-editor/js/plugins.pkgd.min.js'; // Import toàn bộ Froala plugi
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { NgSelect2Module } from 'ng-select2'
 import { DatePipe } from '@angular/common';
-
+import { ToastrModule } from 'ngx-toastr';
 //Services
 import { CookieService } from 'ngx-cookie-service';
 import { AuthenticationService } from './_services/authentication.service';
@@ -42,6 +42,7 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { PostsListComponent } from './Admin/posts/posts-list/posts-list.component';
 import { PostsEditComponent } from './Admin/posts/posts-edit/posts-edit.component';
 import { PaginationComponent } from './shared/pagination/pagination.component';
+import { AllBillsComponent } from './Admin/Customers/all-bills/all-bills.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { PaginationComponent } from './shared/pagination/pagination.component';
     SidebarComponent,
     PostsListComponent,
     PostsEditComponent,
-    PaginationComponent
+    PaginationComponent,
+    AllBillsComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +77,12 @@ import { PaginationComponent } from './shared/pagination/pagination.component';
     DataTablesModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
-    NgSelect2Module
+    NgSelect2Module,
+    ToastrModule.forRoot({
+      timeOut: 1500,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    })
   ],
   providers: [
     AuthenticationService,

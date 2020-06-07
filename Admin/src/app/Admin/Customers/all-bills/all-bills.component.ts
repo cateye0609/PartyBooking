@@ -1,26 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
-// Services
+// Models
+import { Bill, Bill_item } from '../../../_models/bill.model';
+//Services
 import { StatisticalService } from '../../../_services/statistical.service';
 import { PaymentService } from '../../../_services/payment.service';
 import { ProductService } from '../../../_services/product.service';
-// Models
-import { Bill, Bill_item } from '../../../_models/bill.model';
-import { Subject } from 'rxjs';
 
-// declare jquery;
 declare var $: any;
-
 @Component({
-  selector: 'app-recent-bills',
-  templateUrl: './recent-bills.component.html',
-  styleUrls: ['./recent-bills.component.css']
+  selector: 'app-all-bills',
+  templateUrl: './all-bills.component.html',
+  styleUrls: ['./all-bills.component.css']
 })
-
-export class RecentBillsComponent implements OnInit {
+export class AllBillsComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
-  recent_bills: Bill[] = [];
+  total_pages: number;
+  all_bills: Bill[] = [];
   bill_detail: Bill_item[] = [];
   current_bill: Bill;
 
@@ -34,25 +32,20 @@ export class RecentBillsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.recent_billList = this.statisticalService.get_billData();
-    this.get_recentBills(1);
-    this.dtOptions = {
-      "paging": false,
-    }
+    this.get_allBills(1);
   }
 
-  // Generate datatable 
+  // Tạo datatables 
   datatable_generate() {
-    if ($.fn.DataTable.isDataTable('#recentbillTable')) {
-      $('#recentbillTable').DataTable().fnDraw();
+    if ($.fn.DataTable.isDataTable('#allBillTable')) {
+      $('#allBillTable').DataTable().fnDraw();
     }
 
-    $('#recentbillTable').DataTable({
+    $('#allBillTable').DataTable({
       "paging": false,
       "bInfo": false,
     });
   }
-
   // Khi click vào bill trong list
   itemClicked(item: Bill) {
     if ($('#CartDetailModal').hasClass('show')) {
@@ -71,29 +64,30 @@ export class RecentBillsComponent implements OnInit {
     };
   }
 
-  // Xóa bill
-  delete_bill(bill_id) {
-    if (confirm("Are you sure to delete this bill?")) {
-      this.paymentService.delete_bill(bill_id);
-    };
-  }
+  // // Xóa bill
+  // delete_bill(bill_id) {
+  //   if (confirm("Are you sure to delete this bill?")) {
+  //     this.paymentService.delete_bill(bill_id);
+  //   };
+  // }
 
-  // Lấy danh sách bill gần đây và tạo datatable
-  get_recentBills(page: number) {
+  // Lấy danh sách bill và tạo datatable
+  get_allBills(page: number) {
     this.paymentService.get_bills_list(page).subscribe(
       res => {
-        this.recent_bills = res.data.value as Bill[];
+        this.all_bills = res.data.value as Bill[];
+        this.total_pages = res.data.total_page;
         this.dtTrigger.next();
       },
       err => {
         console.log("Error: " + err.error.text);
         sessionStorage.setItem('error', JSON.stringify(err));
       },
-      () => {
-        setTimeout(() => {
-          this.datatable_generate();
-        })
-      }
+      // () => {
+      //   setTimeout(() => {
+      //     this.datatable_generate();
+      //   }, 1000)
+      // }
     )
   }
 

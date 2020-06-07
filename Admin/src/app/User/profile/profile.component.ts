@@ -5,6 +5,7 @@ import { DatePipe } from '@angular/common';
 // Services
 import { api } from '../../_api/apiUrl';
 import { UserService } from '../../_services/user.service';
+import { ToastrService } from 'ngx-toastr';
 // Models
 import { User } from '../../_models/user.model';
 
@@ -20,7 +21,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     public userService: UserService,
     private http: HttpClient,
-    public datepipe: DatePipe
+    public datepipe: DatePipe,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -51,11 +53,11 @@ export class ProfileComponent implements OnInit {
     this.userService.update_userInfo(body).subscribe(
       res => {
         sessionStorage.setItem('response_body', JSON.stringify(res));
-        alert("Update info success!");
+        this.toastr.success("Update info success!");
         window.location.reload();
       },
       err => {
-        alert("Error: " + err.error.message);
+        this.toastr.error("Error: " + err.error.message);
         sessionStorage.setItem('error', JSON.stringify(err));
       }
     )
@@ -75,8 +77,8 @@ export class ProfileComponent implements OnInit {
         window.location.reload();
       },
       err => {
-        alert("Error: " + err.status + " - " + err.error.message);
-        sessionStorage.setItem('error', JSON.stringify(err));
+        this.toastr.error("Error while change avatar!");
+        console.log("Error: " + err.error.message);
       })
   }
 

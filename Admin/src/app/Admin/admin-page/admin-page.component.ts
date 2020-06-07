@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { formatDate } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 // services
 import { StatisticalService } from '../../_services/statistical.service';
@@ -126,6 +127,7 @@ export class AdminPageComponent implements OnInit {
 
   constructor(
     private statisticalService: StatisticalService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -147,7 +149,7 @@ export class AdminPageComponent implements OnInit {
       },
       err => {
         console.log("Error: " + err.error.message);
-        alert("Error while getting money statistic!");
+        this.toastr.error("Error while getting money statistic!");
       });
   }
 
@@ -266,7 +268,7 @@ export class AdminPageComponent implements OnInit {
       },
       err => {
         console.log("Error: " + err.error.message);
-        alert("Error while getting product statistic!");
+        this.toastr.error("Error while getting product statistic!");
       }
     );
   }
@@ -290,7 +292,7 @@ export class AdminPageComponent implements OnInit {
       },
       err => {
         console.log("Error: " + err.error.message);
-        alert("Error while getting customer statistic!");
+        this.toastr.error("Error while getting customer statistic!");
       }
     );
   }
@@ -314,7 +316,7 @@ export class AdminPageComponent implements OnInit {
       },
       err => {
         console.log("Error: " + err.error.message);
-        alert("Error while getting staff statistic!");
+        this.toastr.error("Error while getting staff statistic!");
       }
     );
   }
