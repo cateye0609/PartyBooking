@@ -76,4 +76,14 @@ export class PaymentService {
     get_bills_by_username(username: string) {
         return this.http.get<ApiResponse>(api.get_bills_list + "/" + username, { headers: this.headers });
     }
+
+    // Tạo mã giảm giá
+    create_discount(body: string) {
+        return this.http.post<ApiResponse>(api.create_discount, body, { headers: this.headers });
+    }
+
+    // Lấy danh sách mã giảm giá
+    get_discounts_list() {
+        return this.http.get<ApiResponse>(api.get_discounts_list, { headers: this.headers });
+    }
 }

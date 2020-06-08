@@ -49,6 +49,12 @@
             <li><a [routerLink]="['/post/list']"><i class="fa fa-list"></i>Posts List</a></li>
             </ul>
         </li>
+        <li><a href="#DiscountDropdown" aria-expanded="false" data-toggle="collapse"><i class="fa fa-sticky-note"></i>Discounts</a>
+            <ul id="DiscountDropdown" class="collapse list-unstyled ">
+            <li><a [routerLink]="['/discount/create']"><i class="fa fa-plus"></i>Create discount</a></li>
+            <li><a [routerLink]="['/discount/list']"><i class="fa fa-list"></i>Discounts list</a></li>
+            </ul>
+        </li>
         </ul>
     </nav>
 </div>

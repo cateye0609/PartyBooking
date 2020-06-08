@@ -43,6 +43,8 @@ import { PostsListComponent } from './Admin/posts/posts-list/posts-list.componen
 import { PostsEditComponent } from './Admin/posts/posts-edit/posts-edit.component';
 import { PaginationComponent } from './shared/pagination/pagination.component';
 import { AllBillsComponent } from './Admin/Customers/all-bills/all-bills.component';
+import { CreateDiscountComponent } from './Admin/discounts/create-discount/create-discount.component';
+import { DiscountsListComponent } from './Admin/discounts/discounts-list/discounts-list.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import { AllBillsComponent } from './Admin/Customers/all-bills/all-bills.compone
     PostsListComponent,
     PostsEditComponent,
     PaginationComponent,
-    AllBillsComponent
+    AllBillsComponent,
+    CreateDiscountComponent,
+    DiscountsListComponent
   ],
   imports: [
     BrowserModule,

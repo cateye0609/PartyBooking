@@ -37,6 +37,10 @@ export const api = {
     // Posts
     post: `${apiUrl}/product/posts`,                            // Thao tác với post
 
+    // Discounts
+    create_discount: `${apiUrl}/product/discount`,              // Tạo mã giảm giá
+    get_discounts_list: `${apiUrl}/product/discount_expiresIn`, // Lấy danh sách mã giảm giá
+
     // Others
     upload_image: `${apiUrl}/product/upload_image`,             // Upload ảnh
 };

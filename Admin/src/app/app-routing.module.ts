@@ -14,11 +14,13 @@ import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { ProfileComponent } from './User/profile/profile.component';
 import { CustomersListComponent } from './Admin/Customers/customers-list/customers-list.component';
 import { PayComponent } from './Admin/Customers/pay/pay.component';
-import { RecentBillsComponent } from './Admin/Customers/recent-bills/recent-bills.component';
+// import { RecentBillsComponent } from './Admin/Customers/recent-bills/recent-bills.component';
 import { PostComponent } from './Admin/posts/post/post.component';
 import { PostsListComponent } from './Admin/posts/posts-list/posts-list.component';
 import { PostsEditComponent } from './Admin/posts/posts-edit/posts-edit.component';
 import { AllBillsComponent } from './Admin/Customers/all-bills/all-bills.component';
+import { CreateDiscountComponent } from './Admin/discounts/create-discount/create-discount.component';
+import { DiscountsListComponent } from './Admin/discounts/discounts-list/discounts-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -72,6 +74,14 @@ const routes: Routes = [
       { path: 'edit/:id', component: PostsEditComponent }
     ],
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'discount',
+    children: [
+      { path: '', redirectTo: 'create', pathMatch: 'full' },
+      { path: 'create', component: CreateDiscountComponent },
+      { path: 'list', component: DiscountsListComponent }
+    ]
   },
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: '/not-found' }

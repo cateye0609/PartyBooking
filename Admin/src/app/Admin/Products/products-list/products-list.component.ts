@@ -74,7 +74,7 @@ export class ProductsListComponent implements AfterViewInit, OnDestroy, OnInit {
       () => {
         setTimeout(() => {
           this.datatable_generate();
-        }, 1000)
+        })
       }
     )
   }
