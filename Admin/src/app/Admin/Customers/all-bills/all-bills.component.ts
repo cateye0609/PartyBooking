@@ -16,7 +16,6 @@ declare var $: any;
   styleUrls: ['./all-bills.component.css']
 })
 export class AllBillsComponent implements OnInit {
-  dtOptions: DataTables.Settings = {};
   total_pages: number;
   all_bills: Bill[] = [];
   bill_detail: Bill_item[] = [];
@@ -48,13 +47,8 @@ export class AllBillsComponent implements OnInit {
   }
   // Khi click vào bill trong list
   itemClicked(item: Bill) {
-    if ($('#CartDetailModal').hasClass('show')) {
-      $('#CartDetailModal').modal('hide');
-    }
-    else {
-      this.current_bill = item;
-      this.bill_detail = item.dishes;
-    }
+    this.current_bill = item;
+    this.bill_detail = item.dishes;
   }
 
   // Thanh toán bill

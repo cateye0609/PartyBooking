@@ -86,7 +86,7 @@ import { DiscountsListComponent } from './Admin/discounts/discounts-list/discoun
       timeOut: 1500,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
-    })
+    }),
   ],
   providers: [
     AuthenticationService,

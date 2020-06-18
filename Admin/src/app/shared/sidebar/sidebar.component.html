@@ -2,7 +2,7 @@
     <nav class="side-navbar">
         <!-- Sidebar Header-->
         <div class="sidebar-header d-flex align-items-center">
-        <div class="avatar"><img src={{user_info?.avatar}} alt="avatar" class="img-fluid rounded-circle"></div>
+        <div class="avatar"><a [routerLink]="['/profile']"><img src={{user_info?.avatar}} alt="avatar" class="img-fluid rounded-circle"></a></div>
         <div class="title">
             <a [routerLink]="['/profile']"><h1 class="h4">{{user_info?.username}}</h1></a>
             <p><span *ngIf="user_info?.role==2">Staff</span><span *ngIf="user_info?.role==3">Admin</span></p>
