@@ -1,7 +1,7 @@
 <!-- <body> -->
 <app-header></app-header>
 <div class="text-center" *ngIf="!post?.content">
-  <img src="assets/images/hakase-walking.gif" alt="loading">
+  <div class="spinner-border" role="status"></div>
   <h4>Loading...</h4>
 </div>
 <!-- Main -->
@@ -23,7 +23,7 @@
         <div class="card-body post-content" [innerHTML]="post?.content | safeHtml"></div>
       </div>
       <!-- Author -->
-      <div class="card mb-4">
+      <!-- <div class="card mb-4">
 
         <div class="card-header font-weight-bold">
           <span>About author</span>
@@ -56,7 +56,7 @@
           </div>
 
         </div>
-      </div>
+      </div> -->
     </div>
     <!-- Side content -->
     <div class="col-md-4">
