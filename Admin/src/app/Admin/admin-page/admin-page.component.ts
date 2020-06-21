@@ -42,19 +42,28 @@ export class AdminPageComponent implements OnInit {
   public moneyChartOptions = {
     // scaleShowVerticalLines: false,
     responsive: true,
-    // scales: {
-    //   xAxes: [{
-    //     barPercentage: 0.4,
-    //     maxBarThickness: 50,
-    //   }],
-    //   yAxes: [
-    //     {
-    //       ticks: {
-    //         beginAtZero: true
-    //       }
-    //     }
-    //   ]
-    // }
+    scales: {
+      // xAxes: [{
+      //   barPercentage: 0.4,
+      //   maxBarThickness: 50,
+      // }],
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+            userCallback: function (value, index, values) {
+              // Convert the number to a string and splite the string every 3 charaters from the end
+              value = value.toString();
+              value = value.split(/(?=(?:...)*$)/);
+
+              // Convert the array to a string and format the output
+              value = value.join('.');
+              return value;
+            }
+          }
+        }
+      ]
+    }
   };
 
   // Option cho biểu đồ thống kê tiền khách hàng thanh toán
@@ -81,7 +90,16 @@ export class AdminPageComponent implements OnInit {
         {
           id: 'y-axis-1',
           ticks: {
-            beginAtZero: true
+            beginAtZero: true,
+            userCallback: function (value, index, values) {
+              // Convert the number to a string and splite the string every 3 charaters from the end
+              value = value.toString();
+              value = value.split(/(?=(?:...)*$)/);
+
+              // Convert the array to a string and format the output
+              value = value.join('.');
+              return value;
+            }
           },
           position: 'right',
           gridLines: {
@@ -251,7 +269,7 @@ export class AdminPageComponent implements OnInit {
 
   // Khi thay đổi phạm vi thống kê món ăn
   product_range_changed(value: string) {
-    $('.chart-btn').on('click', function () {
+    $('#productBtn > .chart-btn').on('click', function () {
       $('#productBtn > .chart-btn').removeClass('active');
       $(this).addClass('active');
     });
@@ -275,7 +293,7 @@ export class AdminPageComponent implements OnInit {
 
   // Khi thay đổi phạm vi thống kê khách hàng
   customer_range_changed(value: string) {
-    $('.chart-btn').on('click', function () {
+    $('#customerBtn > .chart-btn').on('click', function () {
       $('#customerBtn > .chart-btn').removeClass('active');
       $(this).addClass('active');
     });
@@ -299,7 +317,7 @@ export class AdminPageComponent implements OnInit {
 
   // Khi thay đổi phạm vi thống kê nhân viên
   staff_range_changed(value: string) {
-    $('.chart-btn').on('click', function () {
+    $('#staffBtn > .chart-btn').on('click', function () {
       $('#staffBtn > .chart-btn').removeClass('active');
       $(this).addClass("active");
     });
