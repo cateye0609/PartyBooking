@@ -4,6 +4,7 @@ import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 // Services
 import { api } from '../../../../_api/apiUrl';
+import { ProductService } from '../../../../_services/product.service';
 // Models
 import { Item } from '../../../../_models/item.model';
 import { Bill } from '../../../../_models/bill.model';
@@ -26,7 +27,8 @@ export class UserCheckoutComponent implements OnInit {
   constructor(
     private http: HttpClient,
     public datepipe: DatePipe,
-    private router: Router
+    private router: Router,
+    private productService: ProductService
   ) { }
 
   ngOnInit() {
@@ -55,6 +57,7 @@ export class UserCheckoutComponent implements OnInit {
         sessionStorage.setItem('response', JSON.stringify(res));
         toastr.success("Order success!");
         localStorage.removeItem('cart');
+        this.productService.cartItems = [];
         sessionStorage.setItem('current_receipt', JSON.stringify({
           items: this.items,
           numOfTable: this.numOfTable,
