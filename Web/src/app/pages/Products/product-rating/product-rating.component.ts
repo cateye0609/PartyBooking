@@ -40,6 +40,12 @@ export class ProductRatingComponent implements OnInit {
     five: 0
   }
   rate = 0;
+
+  edit_trigger = false;
+  edit_id: string;
+  edit_rating = 0;
+  edit_review: string;
+
   constructor(
     private http: HttpClient,
     public authenticationService: AuthenticationService,
@@ -64,18 +70,16 @@ export class ProductRatingComponent implements OnInit {
       let headers = new HttpHeaders({
         'Content-type': 'application/x-www-form-urlencoded',
         'Authorization': localStorage.getItem('token')
-      })
+      });
       let body = `id=${this.productId}&score=${data.rating}&comment=${data.comment}`;
       this.http.post(api.product_rate, body, { headers: headers, observe: 'response' }).subscribe(
-        res_data => {
-          // this.productService.getDishList();
-          sessionStorage.setItem('response', JSON.stringify(res_data.body));
-          this.toastr.success("Posted comment successfully!");
+        res => {
+          this.toastr.success("Posted review successfully!");
           window.location.reload();
         },
         err => {
-          this.toastr.error("Error: " + err.status + " " + err.error.message);
-          sessionStorage.setItem('error', JSON.stringify(err));
+          this.toastr.error("Error posting review");
+          console.log("Error: " + err.error.message);
         }
       )
     }
@@ -109,16 +113,54 @@ export class ProductRatingComponent implements OnInit {
       }
     }
   }
-  // Thay comment thành editor
-  edit_clicked(review: Rating) {
-    if ($('.review-block-description').text() == review.comment) {
-      var $el = $('.review-block-description')
-    }
-    let $textarea = $('<textarea/>').val(review.comment);
-    $el.replaceWith($textarea);
+  // Thay review thành editor
+  edit_clicked(review: Rating, index: number) {
+    this.edit_trigger = true;
+    this.edit_review = review.comment;
+    this.edit_rating = review.score;
+    this.edit_id = review._id;
+    $(`#review${index}`).replaceWith($('#edit_review'));
   }
-  // Sửa comment
-  edit_comment(comment_id: string) {
+  // Sửa review
+  update_review() {
+    let headers = new HttpHeaders({
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': localStorage.getItem('token')
+    });
+    const body = `id=${this.edit_id}&score=${this.edit_rating}&comment=${this.edit_review}`;
+    this.http.put(api.product_rate, body, { headers: headers }).subscribe(
+      res => {
+        this.toastr.success("Update comment successfully!");
+        window.location.reload();
+      },
+      err => {
+        this.toastr.error("Error updating review!");
+        console.log("Error: " + err.error.message);
+      }
+    )
+  }
 
+  // Xóa review
+  delete_review(review: Rating) {
+    let headers = new HttpHeaders({
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': localStorage.getItem('token')
+    });
+    const options = {
+      headers: headers,
+      body: {
+        id: review._id
+      }
+    }
+    this.http.delete(api.product_rate, options).subscribe(
+      res => {
+        this.toastr.success("Delete comment successfully!");
+        window.location.reload();
+      },
+      err => {
+        this.toastr.error("Error deleting review!");
+        console.log("Error: " + err.error.message);
+      }
+    )
   }
 }
