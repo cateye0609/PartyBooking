@@ -3,10 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 // Service
 import { PostService } from '../../../_services/post.service';
+import { ToastrService } from 'ngx-toastr';
 // Models
 import { Post } from '../../../_models/post.model';
-
-declare var toastr;
 
 @Component({
   selector: 'app-post-detail',
@@ -22,6 +21,7 @@ export class PostDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private postService: PostService,
     private router: Router,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -42,7 +42,7 @@ export class PostDetailComponent implements OnInit {
           this.router.navigate(['/404']);
         }
         console.log("Error: " + err.error.message);
-        toastr.error("Error loading post!");
+        this.toastr.error("Error loading post!");
       }
     )
   }
@@ -55,7 +55,7 @@ export class PostDetailComponent implements OnInit {
       },
       err => {
         console.log("Error: " + err.error.message);
-        toastr.error("Error loading similar posts!");
+        this.toastr.error("Error loading similar posts!");
       }
     )
   }

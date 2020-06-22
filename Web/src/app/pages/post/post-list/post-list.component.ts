@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-// Services
-import { PostService } from '../../../_services/post.service';
+
 // Models
 import { Post } from '../../../_models/post.model';
-
-declare var toastr;
+// Services
+import { PostService } from '../../../_services/post.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-post-list',
@@ -16,7 +16,8 @@ export class PostListComponent implements OnInit {
   total_pages: number;
   current_index: number = 1;
   constructor(
-    private postService: PostService
+    private postService: PostService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -32,7 +33,7 @@ export class PostListComponent implements OnInit {
       },
       err => {
         console.log("Error: " + err.error.message);
-        toastr.error("Error loading posts list!");
+        this.toastr.error("Error loading posts list!");
       }
     )
   }

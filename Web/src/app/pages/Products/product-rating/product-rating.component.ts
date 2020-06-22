@@ -5,8 +5,8 @@ import { api } from '../../../_api/apiUrl';
 import { Rating } from '../../../_models/rating.model';
 //Services
 import { AuthenticationService } from '../../../_services/authentication.service';
+import { ToastrService } from 'ngx-toastr';
 
-declare var toastr;
 declare var $: any;
 
 interface Dish_rating {
@@ -43,6 +43,7 @@ export class ProductRatingComponent implements OnInit {
   constructor(
     private http: HttpClient,
     public authenticationService: AuthenticationService,
+    private toastr: ToastrService
   ) { }
   ngOnInit() {
     if (localStorage.getItem('userinfo')) {
@@ -69,17 +70,17 @@ export class ProductRatingComponent implements OnInit {
         res_data => {
           // this.productService.getDishList();
           sessionStorage.setItem('response', JSON.stringify(res_data.body));
-          toastr.success("Posted comment successfully!");
+          this.toastr.success("Posted comment successfully!");
           window.location.reload();
         },
         err => {
-          toastr.error("Error: " + err.status + " " + err.error.message);
+          this.toastr.error("Error: " + err.status + " " + err.error.message);
           sessionStorage.setItem('error', JSON.stringify(err));
         }
       )
     }
     else {
-      toastr.warning("You must be logged in to post a comment!");
+      this.toastr.warning("You must be logged in to post a comment!");
     }
   }
 

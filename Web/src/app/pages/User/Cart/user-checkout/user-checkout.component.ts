@@ -5,12 +5,11 @@ import { Router } from '@angular/router';
 // Services
 import { api } from '../../../../_api/apiUrl';
 import { ProductService } from '../../../../_services/product.service';
+import { ToastrService } from 'ngx-toastr';
 // Models
 import { Item } from '../../../../_models/item.model';
 import { Bill } from '../../../../_models/bill.model';
 import { ApiResponse } from '../../../../_models/response.model';
-
-declare var toastr;
 
 @Component({
   selector: 'app-user-checkout',
@@ -28,7 +27,8 @@ export class UserCheckoutComponent implements OnInit {
     private http: HttpClient,
     public datepipe: DatePipe,
     private router: Router,
-    private productService: ProductService
+    private productService: ProductService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -55,7 +55,7 @@ export class UserCheckoutComponent implements OnInit {
       res => {
         let receipt = res.data as Bill;
         sessionStorage.setItem('response', JSON.stringify(res));
-        toastr.success("Order success!");
+        this.toastr.success("Order success!");
         localStorage.removeItem('cart');
         this.productService.cartItems = [];
         sessionStorage.setItem('current_receipt', JSON.stringify({
@@ -73,7 +73,7 @@ export class UserCheckoutComponent implements OnInit {
         // } else {
         //   toastr.error("Error: " + err.status + " " + err.error.message);
         // }
-        toastr.error("Error: " + err.error.message);
+        this.toastr.error("Error: " + err.error.message);
         sessionStorage.setItem('error', JSON.stringify(err));
       })
   }

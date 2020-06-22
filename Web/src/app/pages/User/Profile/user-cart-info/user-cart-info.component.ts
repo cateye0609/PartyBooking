@@ -6,9 +6,9 @@ import { Bill } from '../../../../_models/bill.model';
 import { UserService } from '../../../../_services/user.service';
 import { ProductService } from '../../../../_services/product.service';
 import { PaymentService } from '../../../../_services/payment.service';
+import { ToastrService } from 'ngx-toastr';
 
 declare var $: any;
-declare var toastr;
 
 @Component({
   selector: 'app-user-cart-info',
@@ -27,7 +27,8 @@ export class UserCartInfoComponent implements OnInit {
   constructor(
     private userService: UserService,
     public productService: ProductService,
-    private paymentService: PaymentService
+    private paymentService: PaymentService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -44,7 +45,7 @@ export class UserCartInfoComponent implements OnInit {
         this.total_pages = res.data.total_page;
       },
       err => {
-        toastr.error("Error: " + err.error.message);
+        this.toastr.error("Error: " + err.error.message);
         sessionStorage.setItem('error', JSON.stringify(err));
       }
     )
@@ -78,7 +79,7 @@ export class UserCartInfoComponent implements OnInit {
         this.checkout_session_id = res_data.data.id;
       },
       err => {
-        toastr.error("Error: " + err.error.message);
+        this.toastr.error("Error: " + err.error.message);
         sessionStorage.setItem('error', JSON.stringify(err));
       }
     )
