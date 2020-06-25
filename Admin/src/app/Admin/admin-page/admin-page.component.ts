@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { StatisticalService } from '../../_services/statistical.service';
 // Models
 import { MoneyStatistic, DishStatistic, CustomerStatistic, StaffStatistic } from '../../_models/statistic.model';
-
+import { NewUpdateModel } from '../../_models/statistic.model';
 declare var $: any;
 
 @Component({
@@ -15,6 +15,7 @@ declare var $: any;
   styleUrls: ['./admin-page.component.css']
 })
 export class AdminPageComponent implements OnInit {
+  new_updates: NewUpdateModel;
   dishes_statistics: DishStatistic[] = [];
 
   // Option cho biểu đồ thống kê món ăn
@@ -154,6 +155,7 @@ export class AdminPageComponent implements OnInit {
     this.product_range_changed('day');
     this.customer_range_changed('day');
     this.staff_range_changed('day');
+    this.get_newUpdate();
   }
 
   // Lấy Thống kê tổng hóa đơn theo 7 ngày gần nhất và tạo biểu đồ tương ứng
@@ -166,7 +168,7 @@ export class AdminPageComponent implements OnInit {
         });
       },
       err => {
-        console.log("Error: " + err.error.message);
+        console.error("Error: " + err.error.message);
         this.toastr.error("Error while getting money statistic!");
       });
   }
@@ -285,7 +287,7 @@ export class AdminPageComponent implements OnInit {
         });
       },
       err => {
-        console.log("Error: " + err.error.message);
+        console.error("Error: " + err.error.message);
         this.toastr.error("Error while getting product statistic!");
       }
     );
@@ -309,7 +311,7 @@ export class AdminPageComponent implements OnInit {
         });
       },
       err => {
-        console.log("Error: " + err.error.message);
+        console.error("Error: " + err.error.message);
         this.toastr.error("Error while getting customer statistic!");
       }
     );
@@ -333,9 +335,18 @@ export class AdminPageComponent implements OnInit {
         });
       },
       err => {
-        console.log("Error: " + err.error.message);
+        console.error("Error: " + err.error.message);
         this.toastr.error("Error while getting staff statistic!");
       }
     );
+  }
+
+  // Lấy các update mới
+  get_newUpdate() {
+    this.statisticalService.get_newUpdate().subscribe(
+      res => {
+        this.new_updates = res.data as NewUpdateModel;
+      }
+    )
   }
 }

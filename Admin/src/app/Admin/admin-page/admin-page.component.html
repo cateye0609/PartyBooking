@@ -14,60 +14,65 @@
             </div>
           </header>
           <!-- Dashboard Counts Section-->
-          <!-- <section class="dashboard-counts no-padding-bottom">
+          <section class="dashboard-counts no-padding-bottom">
             <div class="container-fluid">
               <div class="row bg-white has-shadow">
                 
                 <div class="col-xl-3 col-sm-6">
                   <div class="item d-flex align-items-center">
-                    <div class="icon bg-violet"><i class="icon-user"></i></div>
+                    <div class="icon bg-violet"><i class="fa fa-user"></i></div>
                     <div class="title"><span>New<br>Users</span>
-                      <div class="progress">
+                      <!-- <div class="progress">
                         <div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
-                      </div>
+                      </div> -->
                     </div>
-                    <div class="number"><strong>25</strong></div>
+                    <div class="number"><strong>{{new_updates?.user_new?.length}}</strong></div>
+                    <span *ngIf="new_updates?.user_new?.length > 0" class="icon"><i class="fa fa-long-arrow-up fa-2x text-success"></i></span>
                   </div>
                 </div>
                 
                 <div class="col-xl-3 col-sm-6">
                   <div class="item d-flex align-items-center">
-                    <div class="icon bg-red"><i class="icon-padnote"></i></div>
+                    <div class="icon bg-red"><i class="fa fa-sticky-note"></i></div>
                     <div class="title"><span>New<br>Posts</span>
-                      <div class="progress">
+                      <!-- <div class="progress">
                         <div role="progressbar" style="width: 70%; height: 4px;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-red"></div>
-                      </div>
+                      </div> -->
                     </div>
-                    <div class="number"><strong>70</strong></div>
+                    <div class="number"><strong>{{new_updates?.post_new?.length}}</strong></div>
+                    <span *ngIf="new_updates?.post_new?.length > 0" class="icon"><i class="fa fa-long-arrow-up fa-2x text-success"></i></span>
                   </div>
                 </div>
                 
                 <div class="col-xl-3 col-sm-6">
                   <div class="item d-flex align-items-center">
-                    <div class="icon bg-green"><i class="icon-bill"></i></div>
+                    <div class="icon bg-green"><i class="fa fa-money"></i></div>
                     <div class="title"><span>New<br>Invoices</span>
-                      <div class="progress">
+                      <!-- <div class="progress">
                         <div role="progressbar" style="width: 40%; height: 4px;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-green"></div>
-                      </div>
+                      </div> -->
                     </div>
-                    <div class="number"><strong>40</strong></div>
+                    <div class="number"><strong>{{new_updates?.invoice_new?.length}}</strong></div>
+                    <span *ngIf="new_updates?.invoice_new?.length > 0" class="icon"><i class="fa fa-long-arrow-up fa-2x text-success"></i></span>
                   </div>
                 </div>
                 
                 <div class="col-xl-3 col-sm-6">
                   <div class="item d-flex align-items-center">
-                    <div class="icon bg-orange"><i class="icon-check"></i></div>
-                    <div class="title"><span>New<br>Dishes</span>
-                      <div class="progress">
+                    <div class="icon bg-orange"><i class="fa fa-cutlery"></i></div>
+                    <div class="title"><span>New<br>Products</span>
+                      <!-- <div class="progress">
                         <div role="progressbar" style="width: 50%; height: 4px;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-orange"></div>
-                      </div>
+                      </div> -->
                     </div>
-                    <div class="number"><strong>50</strong></div>
+                    <div class="number"><strong>{{new_updates?.dish_new?.length}}</strong></div>
+                    <span *ngIf="new_updates?.dish_new?.length > 0" class="icon"><i class="fa fa-long-arrow-up fa-2x text-success"></i></span>
+
                   </div>
                 </div>
               </div>
             </div>
-          </section> -->
+          </section>
           <!-- Charts-->
           <section class="charts">
             <div class="container-fluid">
@@ -124,7 +129,7 @@
                   </div>
                 </div>
                 <!-- Customers Statistic -->
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                   <div class="card">
                     <div class="card-header">
                       <div class="row">
@@ -149,7 +154,7 @@
                   </div>
                 </div>
                 <!-- Staffs Statistic -->
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                   <div class="card">
                     <div class="card-header">
                       <div class="row">
