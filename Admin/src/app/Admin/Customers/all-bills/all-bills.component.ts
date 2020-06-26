@@ -86,10 +86,11 @@ export class AllBillsComponent implements OnInit {
   }
 
   // Xác nhận đơn hàng
-  confirm_bill(bill_id: string, note: string) {
-    this.paymentService.confirm_bill(bill_id, note).subscribe(
+  confirm_bill(note: string) {
+    this.paymentService.confirm_bill(this.current_bill._id, note).subscribe(
       res => {
         this.toastr.success("Confirm bill success!");
+        window.location.reload();
       },
       err => {
         this.toastr.error("Failed confirm bill!");
@@ -99,10 +100,11 @@ export class AllBillsComponent implements OnInit {
   }
 
   // Hủy đơn hàng
-  cancel_bill(bill_id: string, note: string) {
-    this.paymentService.cancel_bill(bill_id, note).subscribe(
+  cancel_bill(note: string) {
+    this.paymentService.cancel_bill(this.current_bill._id, note).subscribe(
       res => {
         this.toastr.success("Cancel bill success!");
+        window.location.reload();
       },
       err => {
         this.toastr.error("Failed cancel bill!");

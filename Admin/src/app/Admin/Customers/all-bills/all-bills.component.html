@@ -60,19 +60,28 @@
                                   (click)="itemClicked(bill)">
                             <i class="fa fa-info"></i>
                           </button>
-                          <button *ngIf="bill?.confirm_status==1 && bill?.payment_status==0" type="button"
+                          <button 
+                            *ngIf="bill?.confirm_status==1 && bill?.payment_status==0" type="button"
                             class="btn btn-outline-primary btn-sm mr-2" data-toggle="tooltip" data-placement="top"
-                            title="Pay this bill" (click)="pay(bill._id)"><i class="fa fa-usd"></i></button>
-                          <button *ngIf="bill?.confirm_status==0" type="button" class="btn btn-outline-primary btn-sm mr-2"
-                          data-placement="top" title="Confirm this bill" data-toggle="modal" data-target="#confirmBillModal">
-                          <i class="fa fa-check"></i></button>
+                            title="Pay this bill" (click)="pay(bill._id)">
+                            <i class="fa fa-usd"></i>
+                          </button>
+                          <button 
+                            *ngIf="bill?.confirm_status==0" type="button" class="btn btn-outline-primary btn-sm mr-2"
+                            data-placement="top" title="Confirm this bill" 
+                            data-toggle="modal" data-target="#confirmBillModal"
+                            (click)="itemClicked(bill)">
+                            <i class="fa fa-check"></i>
+                          </button>
                           <!-- <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="tooltip"
                             data-placement="top" title="Cancel this bill" (click)="delete_bill(bill._id)"><i
                               class="fa fa-times"></i></button> -->
                           <button *ngIf="bill?.confirm_status==0" type="button" 
                                   class="btn btn-outline-primary btn-sm" data-placement="top" 
-                                  title="Cancel this bill" data-toggle="modal"
-                                  data-target="#cancelBillModal">
+                                  title="Cancel this bill" 
+                                  data-toggle="modal"
+                                  data-target="#cancelBillModal"
+                                  (click)="itemClicked(bill)">
                             <i class="fa fa-times"></i>
                           </button>
                         </td>
@@ -92,9 +101,10 @@
                                 <textarea ngModel #confirm_note class="w-100" rows="5"></textarea>
                               </div>
                               <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary" 
-                                        data-dismiss="modal" 
-                                        (click)="confirm_bill(bill._id, confirm_note.value)">
+                                <button 
+                                  type="submit" class="btn btn-primary" 
+                                  data-dismiss="modal" 
+                                  (click)="confirm_bill(confirm_note.value)">
                                   OK
                                 </button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -120,7 +130,7 @@
                               <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary" 
                                         data-dismiss="modal" 
-                                        (click)="cancel_bill(bill._id, cancel_note.value)">
+                                        (click)="cancel_bill(cancel_note.value)">
                                   OK
                                 </button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

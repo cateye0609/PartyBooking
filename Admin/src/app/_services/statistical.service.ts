@@ -27,7 +27,6 @@ export class StatisticalService {
     // Thống kê món ăn được gọi
     get_productStatistics(type: string, date?: string) {
         if (type == 'custom') {
-            this.toastr.success(date);
             return this.http.get<ApiResponse>(api.productStatistics + `?type=${type}&date=${date}`, { headers: this.headers });
         } else {
             return this.http.get<ApiResponse>(api.productStatistics + `?type=${type}`, { headers: this.headers });
