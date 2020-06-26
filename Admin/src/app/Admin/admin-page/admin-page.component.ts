@@ -270,12 +270,13 @@ export class AdminPageComponent implements OnInit {
   }
 
   // Khi thay đổi phạm vi thống kê món ăn
-  product_range_changed(value: string) {
+  product_range_changed(value: string, date?: string) {
     $('#productBtn > .chart-btn').on('click', function () {
       $('#productBtn > .chart-btn').removeClass('active');
       $(this).addClass('active');
+      $('#productCustom').collapse('hide');
     });
-    this.statisticalService.get_productStatistics(value).subscribe(
+    this.statisticalService.get_productStatistics(value, date).subscribe(
       res => {
         if (res.data.length > 0) {
           this.isProductDataAvailable = true;
@@ -294,12 +295,13 @@ export class AdminPageComponent implements OnInit {
   }
 
   // Khi thay đổi phạm vi thống kê khách hàng
-  customer_range_changed(value: string) {
+  customer_range_changed(value: string, date?: string) {
     $('#customerBtn > .chart-btn').on('click', function () {
       $('#customerBtn > .chart-btn').removeClass('active');
       $(this).addClass('active');
+      $('#customerCustom').collapse('hide');
     });
-    this.statisticalService.get_customerStatistics(value, null).subscribe(
+    this.statisticalService.get_customerStatistics(value, null, date).subscribe(
       res => {
         if (res.data.length > 0) {
           this.isCustomerDataAvailable = true;
@@ -318,12 +320,13 @@ export class AdminPageComponent implements OnInit {
   }
 
   // Khi thay đổi phạm vi thống kê nhân viên
-  staff_range_changed(value: string) {
+  staff_range_changed(value: string, date?: string) {
     $('#staffBtn > .chart-btn').on('click', function () {
       $('#staffBtn > .chart-btn').removeClass('active');
       $(this).addClass("active");
+      $('#employeeCustom').collapse('hide');
     });
-    this.statisticalService.get_staffStatistics(value).subscribe(
+    this.statisticalService.get_staffStatistics(value, date).subscribe(
       res => {
         if (res.data.length > 0) {
           this.isStaffDataAvailable = true;

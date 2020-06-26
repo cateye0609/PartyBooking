@@ -86,7 +86,11 @@
                           <div id="productBtn" class="col lg-12 mt-1 text-right">
                             <button type="button" value="day" class="btn btn-primary mr-1 chart-btn active" (click)="product_range_changed('day')">Day</button>
                             <button type="button" value="week" class="btn btn-primary mr-1 chart-btn" (click)="product_range_changed('week')">Week</button>
-                            <button type="button" value="month" class="btn btn-primary chart-btn" (click)="product_range_changed('month')">Month</button>
+                            <button type="button" value="month" class="btn btn-primary mr-1 chart-btn" (click)="product_range_changed('month')">Month</button>
+                            <a href="#productCustom" type="button" class="btn btn-primary chart-btn" aria-expanded="false" data-toggle="collapse">Custom</a>
+                            <div id="productCustom" class="form-group collapse list-unstyled mt-3">
+                              <input #productCustomInput type="date" class="form-control" (change)="product_range_changed('custom', productCustomInput.value)">
+                            </div>
                           </div>
                       </div>
                     </div>
@@ -137,7 +141,11 @@
                           <div id="customerBtn" class="col lg-12 mt-1 text-right">
                             <button type="button" value="day" class="btn btn-primary mr-1 chart-btn active" (click)="customer_range_changed('day')">Day</button>
                             <button type="button" value="week" class="btn btn-primary mr-1 chart-btn" (click)="customer_range_changed('week')">Week</button>
-                            <button type="button" value="month" class="btn btn-primary chart-btn" (click)="customer_range_changed('month')">Month</button>
+                            <button type="button" value="month" class="btn btn-primary mr-1 chart-btn" (click)="customer_range_changed('month')">Month</button>
+                            <a href="#customerCustom" type="button" class="btn btn-primary chart-btn" aria-expanded="false" data-toggle="collapse">Custom</a>
+                            <div id="customerCustom" class="form-group collapse list-unstyled mt-3">
+                              <input #customerCustomInput type="date" class="form-control" (change)="customer_range_changed('custom', customerCustomInput.value)">
+                            </div>
                           </div>
                       </div>
                     </div>
@@ -162,7 +170,11 @@
                           <div id="staffBtn" class="col lg-12 mt-1 text-right">
                             <button type="button" value="day" class="btn btn-primary mr-1 chart-btn active" (click)="staff_range_changed('day')">Day</button>
                             <button type="button" value="week" class="btn btn-primary mr-1 chart-btn" (click)="staff_range_changed('week')">Week</button>
-                            <button type="button" value="month" class="btn btn-primary chart-btn" (click)="staff_range_changed('month')">Month</button>
+                            <button type="button" value="month" class="btn btn-primary mr-1 chart-btn" (click)="staff_range_changed('month')">Month</button>
+                            <a href="#employeeCustom" type="button" class="btn btn-primary chart-btn" aria-expanded="false" data-toggle="collapse">Custom</a>
+                            <div id="employeeCustom" class="form-group collapse list-unstyled mt-3">
+                              <input #employeeCustomInput type="date" class="form-control" (change)="staff_range_changed('month', employeeCustomInput.value)">
+                            </div>
                           </div>
                       </div>
                     </div>
