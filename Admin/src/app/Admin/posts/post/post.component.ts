@@ -20,7 +20,9 @@ export class PostComponent implements OnInit {
     private toastr: ToastrService
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.onload();
+  }
 
   options: Object = {
     pastePlain: true,
@@ -66,6 +68,8 @@ export class PostComponent implements OnInit {
     // }
   }
 
+  private onload() { }
+
   // Thêm bài viết
   add_post(content: {
     title: string
@@ -84,7 +88,8 @@ export class PostComponent implements OnInit {
         this.postService.add_post(body).subscribe(
           res => {
             this.toastr.success("Add post success!");
-            window.location.reload();
+            // window.location.reload();
+            this.onload();
           },
           err => {
             this.toastr.error("Error while adding post!");

@@ -27,7 +27,7 @@ export class ProductsListComponent implements AfterViewInit, OnDestroy, OnInit {
     this.productService.delete_dish(id).subscribe(
       res => {
         this.toastr.success("Delete product success!");
-        window.location.reload();
+        this.onload();
       },
       err => {
         this.toastr.error("Error: " + err.error.message);
@@ -56,6 +56,9 @@ export class ProductsListComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   ngOnInit() {
+    this.onload();
+  }
+  private onload() {
     this.get_dishList();
   }
 

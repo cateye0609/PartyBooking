@@ -102,7 +102,7 @@ export class PostsEditComponent implements OnInit {
     this.postService.edit_post(body).subscribe(
       res => {
         this.toastr.success("Edit post success!");
-        window.location.reload();
+        // window.location.reload();
       },
       err => {
         this.toastr.error("Error while uploading post!");

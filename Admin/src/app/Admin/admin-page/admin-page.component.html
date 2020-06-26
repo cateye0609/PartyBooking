@@ -151,13 +151,20 @@
                     </div>
                     <span *ngIf="!isCustomerDataAvailable"  class="text-center pt-2 pb-2">No data available</span>
                     <div class="card-body" *ngIf="isCustomerDataAvailable">
-                        <canvas baseChart
-                          [datasets]="customerChartData"
-                          [labels]="customerChartLabels"
-                          [options]="customerChartOptions"
-                          [legend]="barChartLegend"
-                          [chartType]="barChartType">
-                        </canvas>     
+                      <!-- <div class="chartWrapper">
+                        <div class="chartAreaWrapper">
+                          <div class="chartAreaWrapper2"> -->
+                            <canvas baseChart
+                              [datasets]="customerChartData"
+                              [labels]="customerChartLabels"
+                              [options]="customerChartOptions"
+                              [legend]="barChartLegend"
+                              [chartType]="barChartType">
+                            </canvas>
+                          <!-- </div>
+                        </div>
+                          <canvas id="myChartAxis" height="300" width="0"></canvas>
+                      </div> -->
                     </div>
                   </div>
                 </div>
@@ -173,7 +180,7 @@
                             <button type="button" value="month" class="btn btn-primary mr-1 chart-btn" (click)="staff_range_changed('month')">Month</button>
                             <a href="#employeeCustom" type="button" class="btn btn-primary chart-btn" aria-expanded="false" data-toggle="collapse">Custom</a>
                             <div id="employeeCustom" class="form-group collapse list-unstyled mt-3">
-                              <input #employeeCustomInput type="date" class="form-control" (change)="staff_range_changed('month', employeeCustomInput.value)">
+                              <input #employeeCustomInput type="date" class="form-control" (change)="staff_range_changed('custom', employeeCustomInput.value)">
                             </div>
                           </div>
                       </div>

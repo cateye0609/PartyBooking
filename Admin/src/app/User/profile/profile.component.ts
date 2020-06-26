@@ -26,6 +26,10 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.onload();
+  }
+
+  private onload() {
     this.get_userInfo();
   }
   // Lấy thông tin user
@@ -49,12 +53,11 @@ export class ProfileComponent implements OnInit {
     birthday: string;
   }) {
     this.birthday = this.datepipe.transform(data.birthday, 'MM/dd/yyyy');
-    let body = `full_name=${data.name}&sex=${data.gender}&birthday=${this.birthday}&phone=${data.phone}&email=${data.email}`;
+    let body = `full_name=${data.name}&gender=${data.gender}&birthday=${this.birthday}&phone=${data.phone}&email=${data.email}`;
     this.userService.update_userInfo(body).subscribe(
       res => {
-        sessionStorage.setItem('response_body', JSON.stringify(res));
         this.toastr.success("Update info success!");
-        window.location.reload();
+        this.onload();
       },
       err => {
         this.toastr.error("Error: " + err.error.message);
@@ -74,7 +77,7 @@ export class ProfileComponent implements OnInit {
     this.http.put(api.uploadavatar, body, { headers: headers, observe: 'response' }).subscribe(
       res_data => {
         sessionStorage.setItem('response_body', JSON.stringify(res_data.body));
-        window.location.reload();
+        this.onload();
       },
       err => {
         this.toastr.error("Error while change avatar!");

@@ -21,8 +21,10 @@ export class PayComponent implements OnInit {
     private toastr: ToastrService
   ) { }
 
-  ngOnInit() { }
-
+  ngOnInit() {
+    this.onload();
+  }
+  onload() { }
   // Khi click vào đơn hàng trong danh sách
   itemClicked(item: Bill) {
     this.bill_detail = item.dishes;
@@ -56,7 +58,7 @@ export class PayComponent implements OnInit {
   delete_bill(bill_id: string) {
     if (confirm("Are you sure to delete this bill?")) {
       this.paymentService.delete_bill(bill_id);
-      window.location.reload();
+      this.onload();
     };
   }
 }
