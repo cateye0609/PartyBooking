@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
@@ -16,8 +16,10 @@ declare var $: any;
   styleUrls: ['./all-bills.component.css']
 })
 export class AllBillsComponent implements OnInit {
+  @Input('data') all_bills: Bill[] = [];
+  page: number = 1;
+
   total_pages: number;
-  all_bills: Bill[] = [];
   bill_detail: Bill_item[] = [];
   current_bill: Bill;
 
@@ -74,6 +76,7 @@ export class AllBillsComponent implements OnInit {
       res => {
         this.all_bills = res.data.value as Bill[];
         this.total_pages = res.data.total_page;
+        this.page = page;
         this.dtTrigger.next();
       },
       err => {

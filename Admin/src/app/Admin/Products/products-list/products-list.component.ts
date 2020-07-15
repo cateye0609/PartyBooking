@@ -53,6 +53,10 @@ export class ProductsListComponent implements AfterViewInit, OnDestroy, OnInit {
         "paging": false
       });
     }
+    // var productTable = $('#productTable').DataTable({
+    //   "paging": false
+    // });
+    // var productTable_info = productTable.page.info();
   }
 
   ngOnInit() {

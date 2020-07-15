@@ -41,13 +41,13 @@ export class AdminPageComponent implements OnInit {
 
   // Option cho biểu đồ thống kê doanh thu
   public moneyChartOptions = {
-    // scaleShowVerticalLines: false,
+    scaleShowVerticalLines: false,
     responsive: true,
     scales: {
-      // xAxes: [{
-      //   barPercentage: 0.4,
-      //   maxBarThickness: 50,
-      // }],
+      xAxes: [{
+        barPercentage: 0.4,
+        maxBarThickness: 50,
+      }],
       yAxes: [
         {
           ticks: {

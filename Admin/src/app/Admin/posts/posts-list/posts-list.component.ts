@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 // Services
 import { PostService } from '../../../_services/post.service';
 // Models 
@@ -9,8 +9,10 @@ import { Post } from '../../../_models/post.model';
   styleUrls: ['./posts-list.component.css']
 })
 export class PostsListComponent implements OnInit {
+  @Input('data') posts_list: Post[] = [];
+  page: number = 1;
+
   total_pages: number
-  posts_list: Post[] = [];
 
   constructor(
     private postService: PostService,
@@ -26,6 +28,7 @@ export class PostsListComponent implements OnInit {
       res => {
         this.posts_list = res.data.value as Post[];
         this.total_pages = res.data.total_page;
+        this.page = page;
       },
       err => {
         console.log("Error: " + err.error.message);

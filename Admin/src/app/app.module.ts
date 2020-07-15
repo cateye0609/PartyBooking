@@ -12,6 +12,7 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { NgSelect2Module } from 'ng-select2'
 import { DatePipe } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxPaginationModule } from 'ngx-pagination';
 //Services
 import { CookieService } from 'ngx-cookie-service';
 import { AuthenticationService } from './_services/authentication.service';
@@ -41,7 +42,6 @@ import { PostComponent } from './Admin/posts/post/post.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { PostsListComponent } from './Admin/posts/posts-list/posts-list.component';
 import { PostsEditComponent } from './Admin/posts/posts-edit/posts-edit.component';
-import { PaginationComponent } from './shared/pagination/pagination.component';
 import { AllBillsComponent } from './Admin/Customers/all-bills/all-bills.component';
 import { CreateDiscountComponent } from './Admin/discounts/create-discount/create-discount.component';
 import { DiscountsListComponent } from './Admin/discounts/discounts-list/discounts-list.component';
@@ -66,7 +66,6 @@ import { DiscountsListComponent } from './Admin/discounts/discounts-list/discoun
     SidebarComponent,
     PostsListComponent,
     PostsEditComponent,
-    PaginationComponent,
     AllBillsComponent,
     CreateDiscountComponent,
     DiscountsListComponent
@@ -87,6 +86,7 @@ import { DiscountsListComponent } from './Admin/discounts/discounts-list/discoun
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
+    NgxPaginationModule
   ],
   providers: [
     AuthenticationService,
