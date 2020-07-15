@@ -158,13 +158,16 @@ span.review-link:hover {
   padding: 0 0.8em 0.8em;
 }
 
+.suggest-item h6 {
+  margin-bottom: 0;
+}
+
 .suggest-item-thumb-wrapper {
   overflow: hidden;
 }
 
 .suggest-item-thumb {
-  min-height: 6em;
-  max-height: 6em;
+  height: 100px;
   -webkit-transform: scale(1);
   transform: scale(1);
   -webkit-transition: .3s ease-in-out;

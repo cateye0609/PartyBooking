@@ -10,7 +10,7 @@ import { MatTableModule } from '@angular/material/table';
 import { BarRatingModule } from "ngx-bar-rating";
 import { NgxStripeModule } from 'ngx-stripe';
 import { ToastrModule } from 'ngx-toastr';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 import { DatePipe } from '@angular/common';
 
 //Services
@@ -56,7 +56,6 @@ import { PaymentInfoComponent } from './pages/User/payment/payment-info/payment-
 import { PaymentMobileComponent } from './pages/User/payment/payment-mobile/payment-mobile.component';
 import { PostListComponent } from './pages/post/post-list/post-list.component';
 import { PostDetailComponent } from './pages/post/post-detail/post-detail.component';
-import { PaginationComponent } from './component/pagination/pagination.component';
 import { LoadingComponent } from './component/loading/loading.component';
 import { SafeHtml } from './_pipes/safeHtml.pipe';
 import { CardLoadingComponent } from './component/card-loading/card-loading.component';
@@ -95,7 +94,6 @@ import { CardLoadingComponent } from './component/card-loading/card-loading.comp
     PaymentMobileComponent,
     PostListComponent,
     PostDetailComponent,
-    PaginationComponent,
     LoadingComponent,
     SafeHtml,
     CardLoadingComponent
@@ -116,6 +114,7 @@ import { CardLoadingComponent } from './component/card-loading/card-loading.comp
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
+    NgxPaginationModule
   ],
   providers: [
     AuthenticationService,

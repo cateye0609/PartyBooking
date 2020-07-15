@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 // Models
 import { Post } from '../../../_models/post.model';
@@ -12,9 +12,10 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./post-list.component.css'],
 })
 export class PostListComponent implements OnInit {
-  post_list: Post[] = [];
+  @Input('data') post_list: Post[] = [];
+  page: number = 1;
   total_pages: number;
-  current_index: number = 1;
+
   constructor(
     private postService: PostService,
     private toastr: ToastrService
@@ -30,6 +31,7 @@ export class PostListComponent implements OnInit {
       res => {
         this.post_list = res.data.value as Post[];
         this.total_pages = res.data.total_page;
+        this.page = page;
       },
       err => {
         console.log("Error: " + err.error.message);

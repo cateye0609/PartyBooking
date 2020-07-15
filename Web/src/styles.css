@@ -17,3 +17,13 @@ body {
 /* .dark-grey-text:hover, .dark-grey-text:focus {
     color: #4f4f4f !important;
 } */
+
+.pb-pagination /deep/ .ngx-pagination .current {
+    background-color: #2ecc71;
+    border-radius: 100%;
+    transition: 0.2s;
+}
+
+.pb-pagination /deep/ .ngx-pagination li a:hover {
+    border-radius: 100%;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 //Models
 import { User } from '../../../../_models/user.model';
 import { Bill } from '../../../../_models/bill.model';
@@ -16,11 +16,12 @@ declare var $: any;
   styleUrls: ['./user-cart-info.component.css']
 })
 export class UserCartInfoComponent implements OnInit {
+  @Input('data') cart_history: Bill[] = [];
+  page: number = 1;
   total_pages: number;
 
   checkout_session_id: string;
   userData: User;
-  cart_history: Bill[] = [];
   cartDetail = [];
   payment_status: boolean;
 
@@ -43,6 +44,7 @@ export class UserCartInfoComponent implements OnInit {
       res => {
         this.cart_history = res.data.value as Bill[];
         this.total_pages = res.data.total_page;
+        this.page = page;
       },
       err => {
         this.toastr.error("Error: " + err.error.message);
