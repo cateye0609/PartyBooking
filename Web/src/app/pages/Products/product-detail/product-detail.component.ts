@@ -7,6 +7,9 @@ import { Product } from '../../../_models/product.model';
 import { Rating } from '../../../_models/rating.model';
 
 interface Dish_rating {
+  start: number;
+  end: number;
+  total_page: number;
   count_rate: number;
   avg_rate: number;
   list_rate: Rating[];

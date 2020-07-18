@@ -6,10 +6,14 @@ import { Rating } from '../../../_models/rating.model';
 //Services
 import { AuthenticationService } from '../../../_services/authentication.service';
 import { ToastrService } from 'ngx-toastr';
+import { ProductService } from '../../../_services/product.service';
 
 declare var $: any;
 
 interface Dish_rating {
+  start: number;
+  end: number;
+  total_page: number;
   count_rate: number;
   avg_rate: number;
   list_rate: Rating[];
@@ -30,6 +34,10 @@ interface rateOverall {
 export class ProductRatingComponent implements OnInit {
   @Input() productId: string;
   @Input() productRating: Dish_rating;
+  @Input('data') list_rate: Rating[] = [];
+  page: number = 1;
+  total_pages: number;
+
   current_user_id: string;  // Để so xác nhận comment nào là của mình
   // product_rating: any;
   reviewOverall: rateOverall = {
@@ -49,7 +57,8 @@ export class ProductRatingComponent implements OnInit {
   constructor(
     private http: HttpClient,
     public authenticationService: AuthenticationService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private productService: ProductService,
   ) { }
   ngOnInit() {
     if (localStorage.getItem('userinfo')) {
@@ -59,6 +68,8 @@ export class ProductRatingComponent implements OnInit {
     if (!this.authenticationService.loggedIn()) {
       $('#reviewbtn').text('Login to write review');
     }
+
+    this.get_rating_page(1);
   }
 
   // Xác nhận comment
@@ -160,6 +171,20 @@ export class ProductRatingComponent implements OnInit {
       err => {
         this.toastr.error("Error deleting review!");
         console.log("Error: " + err.error.message);
+      }
+    )
+  }
+
+  // Get rating page
+  get_rating_page(page: number) {
+    this.productService.get_dishRating(this.productId, page).subscribe(
+      res => {
+        this.list_rate = (res.data as Dish_rating).list_rate;
+        this.page = page;
+      },
+      err => {
+        console.log("Error: " + err.error.message);
+        sessionStorage.setItem('error', JSON.stringify(err));
       }
     )
   }

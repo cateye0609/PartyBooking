@@ -12,6 +12,7 @@ import { NgxStripeModule } from 'ngx-stripe';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DatePipe } from '@angular/common';
+import { AgmCoreModule } from '@agm/core';
 
 //Services
 import { AuthenticationService } from './_services/authentication.service';
@@ -59,6 +60,7 @@ import { PostDetailComponent } from './pages/post/post-detail/post-detail.compon
 import { LoadingComponent } from './component/loading/loading.component';
 import { SafeHtml } from './_pipes/safeHtml.pipe';
 import { CardLoadingComponent } from './component/card-loading/card-loading.component';
+import { MapComponent } from './pages/map/map.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +98,8 @@ import { CardLoadingComponent } from './component/card-loading/card-loading.comp
     PostDetailComponent,
     LoadingComponent,
     SafeHtml,
-    CardLoadingComponent
+    CardLoadingComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
@@ -114,7 +117,11 @@ import { CardLoadingComponent } from './component/card-loading/card-loading.comp
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
-    NgxPaginationModule
+    NgxPaginationModule,
+    AgmCoreModule.forRoot({
+      apiKey: "AIzaSyD0KIBgr_Ixh5sLNqAW-zJ_13sxDtk7F3g",
+      libraries: ["places", "geometry"]
+    })
   ],
   providers: [
     AuthenticationService,
