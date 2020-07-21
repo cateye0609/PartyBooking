@@ -61,6 +61,10 @@ export class ProductRatingComponent implements OnInit {
     private productService: ProductService,
   ) { }
   ngOnInit() {
+    this.loaddata();
+  }
+
+  loaddata() {
     if (localStorage.getItem('userinfo')) {
       this.current_user_id = JSON.parse(localStorage.getItem('userinfo')).username;
     }
@@ -86,7 +90,11 @@ export class ProductRatingComponent implements OnInit {
       this.http.post(api.product_rate, body, { headers: headers, observe: 'response' }).subscribe(
         res => {
           this.toastr.success("Posted review successfully!");
-          window.location.reload();
+          this.loaddata();
+          $('#new-review').val('')
+          data.comment = '';
+          data.rating = 0;
+          this.rate = 0;
         },
         err => {
           this.toastr.error("Error posting review");
@@ -124,6 +132,7 @@ export class ProductRatingComponent implements OnInit {
       }
     }
   }
+
   // Thay review thành editor
   edit_clicked(review: Rating, index: number) {
     this.edit_trigger = true;
@@ -154,7 +163,6 @@ export class ProductRatingComponent implements OnInit {
   // Xóa review
   delete_review(review: Rating) {
     let headers = new HttpHeaders({
-      'Content-type': 'application/x-www-form-urlencoded',
       'Authorization': localStorage.getItem('token')
     });
     const options = {
@@ -166,7 +174,7 @@ export class ProductRatingComponent implements OnInit {
     this.http.delete(api.product_rate, options).subscribe(
       res => {
         this.toastr.success("Delete comment successfully!");
-        window.location.reload();
+        this.loaddata();
       },
       err => {
         this.toastr.error("Error deleting review!");
@@ -180,6 +188,7 @@ export class ProductRatingComponent implements OnInit {
     this.productService.get_dishRating(this.productId, page).subscribe(
       res => {
         this.list_rate = (res.data as Dish_rating).list_rate;
+        this.total_pages = res.data.total_page;
         this.page = page;
       },
       err => {

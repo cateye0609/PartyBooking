@@ -27,3 +27,16 @@ body {
 .pb-pagination /deep/ .ngx-pagination li a:hover {
     border-radius: 100%;
 }
+
+.original-price {
+    margin-left: .5rem;
+    font-size: .8em;
+    font-weight: normal;
+    color: rgb(120, 120, 120)!important;
+    text-decoration: line-through;
+}
+
+.discount-percent {
+    text-transform: uppercase;
+    color: #ff5252;
+}

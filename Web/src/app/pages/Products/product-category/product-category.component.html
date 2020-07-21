@@ -41,7 +41,10 @@
                 <h5 class="card-title">
                   <a [routerLink]="['/product', product._id]">{{product.name}}</a>
                 </h5>
-                <h6 class="text-uppercase">{{product?.price | number}} {{product?.currency}}</h6>
+                <h6 class="text-uppercase">
+                  {{product?.price | number}} {{product?.currency}}
+                  <span class="discount-percent" *ngIf="product?.discount>0">{{product?.discount}}% off</span>
+                </h6>
                 <p class="card-text">{{product?.description}}</p>
               </div>
               <div class="card-footer">

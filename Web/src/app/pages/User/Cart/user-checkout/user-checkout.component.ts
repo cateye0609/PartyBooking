@@ -35,7 +35,10 @@ export class UserCheckoutComponent implements OnInit {
     this.loadCart();
   }
 
-  order_comfirm() {
+  order_comfirm(data: {
+    customer_number: number;
+    discount: string;
+  }) {
     let headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
       'Authorization': localStorage.getItem('token'),
@@ -50,29 +53,17 @@ export class UserCheckoutComponent implements OnInit {
         }
       )
     }
-    let body = `dishes=${JSON.stringify(item_ordered)}&table=${this.numOfTable}&date_party=${this.deliveryDate}&count_customer=1`;
+    let body = `dishes=${JSON.stringify(item_ordered)}&table=${this.numOfTable}&date_party=${this.deliveryDate}&count_customer=${data.customer_number}&discount_code=${data.discount}`;
     this.http.post<ApiResponse>(api.book, body, { headers: headers }).subscribe(
       res => {
         let receipt = res.data as Bill;
-        sessionStorage.setItem('response', JSON.stringify(res));
         this.toastr.success("Order success!");
         localStorage.removeItem('cart');
         this.productService.cartItems = [];
-        sessionStorage.setItem('current_receipt', JSON.stringify({
-          items: this.items,
-          numOfTable: this.numOfTable,
-          dateParty: this.deliveryDate,
-          total_price: this.total
-        }))
+        sessionStorage.setItem('current_receipt', JSON.stringify(res.data));
         this.router.navigate(['/receipt/' + receipt._id]);
       },
       err => {
-        // console.log(err);
-        // if (err.status == 400) {
-        //   toastr.warning('Please fill all the field with valid value!');
-        // } else {
-        //   toastr.error("Error: " + err.status + " " + err.error.message);
-        // }
         this.toastr.error("Error: " + err.error.message);
         sessionStorage.setItem('error', JSON.stringify(err));
       })
@@ -81,19 +72,11 @@ export class UserCheckoutComponent implements OnInit {
   changeOfTable(event: any) {
     this.numOfTable = event.target.value;
   }
+
   changeOfDate(event: any) {
     this.deliveryDate = event.target.value;
     this.deliveryDate = this.datepipe.transform(this.deliveryDate, 'MM/dd/yyyy HH:mm');
-
-    // let today = new Date();
-    // if (this.deliveryDate < this.datepipe.transform(today), 'MM/dd/yyyy HH:mm') {
-    //   toastr.error("Cannot choose day smaller than current date!");
-    //   $('#deliveryDate').val('');
-    // }
   }
-  // changeOfTime(event: any) {
-  //   this.deliveryTime = event.target.value;
-  // }
 
   loadCart(): void {
     this.total = 0;
