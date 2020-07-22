@@ -12,7 +12,7 @@ import { NgxStripeModule } from 'ngx-stripe';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DatePipe } from '@angular/common';
-import { AgmCoreModule } from '@agm/core';
+// import { AgmCoreModule } from '@agm/core';
 
 //Services
 import { AuthenticationService } from './_services/authentication.service';
@@ -118,10 +118,10 @@ import { MapComponent } from './pages/map/map.component';
       preventDuplicates: true,
     }),
     NgxPaginationModule,
-    AgmCoreModule.forRoot({
-      apiKey: "AIzaSyD0KIBgr_Ixh5sLNqAW-zJ_13sxDtk7F3g",
-      libraries: ["places", "geometry"]
-    })
+    // AgmCoreModule.forRoot({
+    //   apiKey: "AIzaSyD0KIBgr_Ixh5sLNqAW-zJ_13sxDtk7F3g",
+    //   libraries: ["places", "geometry"]
+    // })
   ],
   providers: [
     AuthenticationService,
