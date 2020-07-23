@@ -37,7 +37,7 @@ export class DiscountsListComponent implements OnInit {
           this.datatable_generate();
         })
       }
-    )
+    );
   }
 
   // Tạo datatable 

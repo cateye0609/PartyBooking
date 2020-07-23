@@ -43,7 +43,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'add', pathMatch: 'full' },
       { path: 'add', component: AddEmployeeComponent },
       { path: 'edit', component: EditEmployeeComponent },
-      { path: 'list', component: EmployeesListComponent }
+      { path: 'list/:page', component: EmployeesListComponent }
     ],
     canActivate: [AuthGuard]
   },
@@ -51,7 +51,7 @@ const routes: Routes = [
     path: 'customers',
     children: [
       { path: '', redirectTo: 'list', pathMatch: 'full' },
-      { path: 'list', component: CustomersListComponent },
+      { path: 'list/:page', component: CustomersListComponent },
     ],
     canActivate: [AuthGuard]
   },
@@ -61,7 +61,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'pay', pathMatch: 'full' },
       { path: 'pay', component: PayComponent },
       // { path: 'recent-bill', component: RecentBillsComponent },
-      { path: 'all-bills', component: AllBillsComponent }
+      { path: 'all-bills/:page', component: AllBillsComponent }
     ],
     canActivate: [AuthGuard]
   },
@@ -70,7 +70,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'add', pathMatch: 'full' },
       { path: 'create', component: PostComponent },
-      { path: 'list', component: PostsListComponent },
+      { path: 'list/:page', component: PostsListComponent },
       { path: 'edit/:id', component: PostsEditComponent }
     ],
     canActivate: [AuthGuard]

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, Router } from '@angular/router';
 
 // Models
 import { Bill, Bill_item } from '../../../_models/bill.model';
@@ -8,6 +8,7 @@ import { Bill, Bill_item } from '../../../_models/bill.model';
 import { StatisticalService } from '../../../_services/statistical.service';
 import { PaymentService } from '../../../_services/payment.service';
 import { ProductService } from '../../../_services/product.service';
+
 
 declare var $: any;
 @Component({
@@ -18,18 +19,18 @@ declare var $: any;
 export class AllBillsComponent implements OnInit {
   @Input('data') all_bills: Bill[] = [];
   page: number = 1;
-
   total_pages: number;
+
   bill_detail: Bill_item[] = [];
   current_bill: Bill;
-
-  dtTrigger: Subject<any> = new Subject();
 
   constructor(
     public statisticalService: StatisticalService,
     public paymentService: PaymentService,
     public productService: ProductService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -37,19 +38,23 @@ export class AllBillsComponent implements OnInit {
   }
 
   private onload() {
-    this.get_allBills(1);
+    this.activatedRoute.params.subscribe(params => {
+      this.page = params['page'];
+      this.get_allBills(this.page);
+    })
   }
-  // Tạo datatables 
-  datatable_generate() {
-    if ($.fn.DataTable.isDataTable('#allBillTable')) {
-      $('#allBillTable').DataTable().fnDraw();
-    }
 
-    $('#allBillTable').DataTable({
-      "paging": false,
-      "bInfo": false,
+  get_page(page: number) {
+    this.router.navigate(['bills/all-bills/', page]).then(() => {
+      window.location.reload();
     });
   }
+
+  // Tạo datatables 
+  datatable_generate() {
+    $('#allBillTable').DataTable({ "paging": false });
+  }
+
   // Khi click vào bill trong list
   itemClicked(item: Bill) {
     this.current_bill = item;
@@ -76,18 +81,15 @@ export class AllBillsComponent implements OnInit {
       res => {
         this.all_bills = res.data.value as Bill[];
         this.total_pages = res.data.total_page;
-        this.page = page;
-        this.dtTrigger.next();
       },
       err => {
         console.log("Error: " + err.error.text);
-        sessionStorage.setItem('error', JSON.stringify(err));
       },
-      // () => {
-      //   setTimeout(() => {
-      //     this.datatable_generate();
-      //   }, 1000)
-      // }
+      () => {
+        setTimeout(() => {
+          this.datatable_generate();
+        })
+      }
     )
   }
 
@@ -100,7 +102,7 @@ export class AllBillsComponent implements OnInit {
       },
       err => {
         this.toastr.error("Failed confirm bill!");
-        console.log("Error: " + err.error.message);
+        console.error("Error: " + err.error.message);
       }
     )
   }
@@ -114,7 +116,7 @@ export class AllBillsComponent implements OnInit {
       },
       err => {
         this.toastr.error("Failed cancel bill!");
-        console.log("Error: " + err.error.message);
+        console.error("Error: " + err.error.message);
       }
     )
   }

@@ -28,7 +28,7 @@
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="employeTable" class="table table-bordered table-striped">
+                  <table id="postsTable" class="table table-bordered table-striped">
                     <thead class="thead-dark">
                       <tr>
                         <th class="text-center">#</th>
@@ -52,17 +52,17 @@
                             <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="tooltip"
                               data-placement="top" title="Edit"><i class="fa fa-edit"></i></button>
                           </a>
-                          <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip"
+                          <!-- <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip"
                             data-placement="top" title="Delete this post" (click)="post_delete(post?._id)">
                             <i class="fa fa-trash" aria-hidden="true"></i>
-                          </button>
+                          </button> -->
                         </td>
                       </tr>
                     </tbody>
                   </table>
                   <!-- <pagination [total_pages]="total_pages" (onChange)="get_posts_list($event)"></pagination> -->
                   <div class="has-text-centered pb-pagination text-right">
-                    <pagination-controls (pageChange)="get_posts_list($event)" previousLabel="Previous" nextLabel="Next"
+                    <pagination-controls (pageChange)="get_page($event)" previousLabel="Previous" nextLabel="Next"
                       autoHide="true">
                     </pagination-controls>
                   </div>
