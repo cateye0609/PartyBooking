@@ -34,7 +34,7 @@ export class EditProfileComponent implements OnInit {
     email: string;
   }) {
     this.birthday = this.datepipe.transform(this.birthday, 'MM/dd/yyyy');
-    let body = `full_name=${data.fullname}&sex=${data.gender}&birthday=${this.birthday}&phone=${data.phonenumber}&email=${data.email}`;
+    let body = `full_name=${data.fullname}&gender=${data.gender}&birthday=${this.birthday}&phone=${data.phonenumber}&email=${data.email}`;
     let headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
       'Authorization': localStorage.getItem('token'),
