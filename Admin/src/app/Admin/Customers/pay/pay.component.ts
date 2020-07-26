@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 
 // Services
@@ -15,18 +15,19 @@ export class PayComponent implements OnInit {
   bill_info: Bill[] = [];
   haveBill: boolean;
   bill_detail: Bill_item[] = [];
+  current_bill: Bill;
 
+  current_user_bill: string;
   constructor(
     public paymentService: PaymentService,
     private toastr: ToastrService
   ) { }
 
-  ngOnInit() {
-    this.onload();
-  }
-  onload() { }
-  // Khi click vào đơn hàng trong danh sách
+  ngOnInit() { }
+
+  // Khi click vào bill trong list
   itemClicked(item: Bill) {
+    this.current_bill = item;
     this.bill_detail = item.dishes;
   }
 
@@ -34,6 +35,7 @@ export class PayComponent implements OnInit {
   searchBill(data: {
     username: string
   }) {
+    this.current_user_bill = data.username;
     this.paymentService.get_bills_by_username(data.username).subscribe(
       res => {
         this.bill_info = res.data as Bill[];
@@ -54,11 +56,31 @@ export class PayComponent implements OnInit {
     };
   }
 
-  // Xóa đơn hàng
-  delete_bill(bill_id: string) {
-    if (confirm("Are you sure to delete this bill?")) {
-      this.paymentService.delete_bill(bill_id);
-      this.onload();
-    };
+  // Xác nhận đơn hàng
+  confirm_bill(note: string) {
+    this.paymentService.confirm_bill(this.current_bill._id, note).subscribe(
+      res => {
+        this.toastr.success("Confirm bill success!");
+        this.searchBill({ username: this.current_user_bill });
+      },
+      err => {
+        this.toastr.error("Failed confirm bill!");
+        console.error("Error: " + err.error.message);
+      }
+    )
+  }
+
+  // Hủy đơn hàng
+  cancel_bill(note: string) {
+    this.paymentService.cancel_bill(this.current_bill._id, note).subscribe(
+      res => {
+        this.toastr.success("Cancel bill success!");
+        this.searchBill({ username: this.current_user_bill });
+      },
+      err => {
+        this.toastr.error("Failed cancel bill!");
+        console.error("Error: " + err.error.message);
+      }
+    )
   }
 }
