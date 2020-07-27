@@ -1,9 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { catchError } from 'rxjs/operators';
 
 // Services
 import { api } from '../_api/apiUrl';
+import { CommonService } from './common.service';
 // Models
 import { ApiResponse } from '../_models/response.model';
 
@@ -16,7 +18,8 @@ export class StaffService {
     ////////////////////
     constructor(
         private http: HttpClient,
-        private toastr: ToastrService
+        private toastr: ToastrService,
+        private commonService: CommonService
     ) { }
 
     // Lấy danh sách nhân viên
@@ -36,18 +39,10 @@ export class StaffService {
             'Authorization': localStorage.getItem('token')
         });
         let body = `user_id=${user_id}`;
-        console.log(body);
-        this.http.put(api.downgrade_role, body, { headers: headers }).subscribe(
-            res => {
-                sessionStorage.setItem('response', JSON.stringify(res));
-                this.toastr.success("Downgrade user success!");
-                window.location.reload();
-            },
-            err => {
-                this.toastr.error("Error downrade user!");
-                console.log("Error: " + err.error.message);
-            }
-        );
+        return this.http.put(api.downgrade_role, body, { headers: headers })
+            .pipe(
+                catchError(err => this.commonService.handleError(err, "Error downgrade user!"))
+            );
     }
 
     // Nâng cấp tài khoản khách hàng
@@ -57,15 +52,9 @@ export class StaffService {
             'Authorization': localStorage.getItem('token')
         });
         let body = `user_id=${user_id}`;
-        this.http.put(api.upgrade_role, body, { headers: headers }).subscribe(
-            res => {
-                sessionStorage.setItem('response', JSON.stringify(res));
-                this.toastr.success("Upgrade user success!");
-                window.location.reload();
-            },
-            err => {
-                this.toastr.error("Error upgrade user!");
-                console.log("Error" + err.error.message);
-            });
+        return this.http.put(api.upgrade_role, body, { headers: headers })
+            .pipe(
+                catchError(err => this.commonService.handleError(err, "Error upgrade user!"))
+            );
     }
 }

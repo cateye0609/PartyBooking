@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, Input } from '@angular/core';
 import { StaffService } from '../../../_services/staff.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 // declare jquery;
 declare var $: any;
@@ -26,12 +27,18 @@ export class CustomersListComponent implements AfterViewInit, OnDestroy, OnInit 
   constructor(
     private staffService: StaffService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) { }
 
   upgrade(user_id: string) {
     if (confirm("Are you sure to upgrade this user?")) {
-      this.staffService.upgradeCustomer(user_id);
+      this.staffService.upgradeCustomer(user_id).subscribe(
+        (res) => {
+          this.toastr.success("Upgrade user success!");
+          this.loaddata();
+        }
+      );
     };
   }
 

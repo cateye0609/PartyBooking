@@ -19,24 +19,15 @@
     color: white;
 } */
 
-/* .chartWrapper {
+.graph {
+    padding: 10px;
     position: relative;
-}
-
-.chartWrapper>canvas {
-    position: absolute;
-    left: 0;
-    top: 0;
-    pointer-events: none;
-}
-
-.chartAreaWrapper {
     overflow-x: scroll;
-    position: relative;
     width: 100%;
 }
 
-.chartAreaWrapper2 {
-    position: relative;
-    height: 300px;
-} */
+.graph-container {
+    height: 500px;
+    width: 100%;
+    min-width: 100%
+}

@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, Input } from '@angular/core';
 import { StaffService } from '../../../_services/staff.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 // declare jquery;
 declare var $: any;
 
@@ -26,12 +27,18 @@ export class EmployeesListComponent implements AfterViewInit, OnDestroy, OnInit 
   constructor(
     private staffService: StaffService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) { }
 
   downgrade(user_id: string) {
     if (confirm("Are you sure to downgrade this user?")) {
-      this.staffService.downgradeStaff(user_id);
+      this.staffService.downgradeStaff(user_id).subscribe(
+        (res) => {
+          this.toastr.success("Downgrade user success!");
+          this.loaddata();
+        }
+      );
     };
   }
 
