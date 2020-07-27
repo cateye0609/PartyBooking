@@ -4,6 +4,7 @@ import { PostService } from '../../../_services/post.service';
 // Models 
 import { Post } from '../../../_models/post.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-posts-list',
   templateUrl: './posts-list.component.html',
@@ -18,7 +19,8 @@ export class PostsListComponent implements OnInit {
   constructor(
     private postService: PostService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -59,7 +61,14 @@ export class PostsListComponent implements OnInit {
 
   // Xóa bài viết 
   post_delete(id: string) {
-
+    if (confirm("Are you sure to delete this post?")) {
+      this.postService.delete_post(id).subscribe(
+        (res) => {
+          this.toastr.success("Delete post success!");
+          this.loaddata();
+        }
+      );
+    }
   }
 
   // Tạo datatable 
@@ -67,21 +76,5 @@ export class PostsListComponent implements OnInit {
     var postsTable = $('#postsTable').DataTable({
       "paging": false
     });
-    // if (postsTable instanceof $.fn.dataTable.Api) {
-    //   postsTable.destroy();
-    // } else {
-    //   $('#postsTable').DataTable({
-    //     "paging": false
-    //   });
-    // }
-    // var postsTable_info = postsTable.page.info();
-
-    // if (postsTable_info.pages == 1) {
-    //   postsTable.destroy();
-    //   $('#postsTable').DataTable({
-    //     "paging": false
-    //   });
-    // }
   }
-
 }
