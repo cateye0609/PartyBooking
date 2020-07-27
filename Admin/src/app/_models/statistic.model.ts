@@ -40,3 +40,29 @@ export interface NewUpdateModel {
         data: [];
     };
 }
+
+export interface ServerUsage {
+    cpu: {
+        usage: number;
+        free: number;
+        count: number;
+    };
+    drive: {
+        totalGb: number;
+        usedGb: number;
+        freeGb: number;
+        usedPercentage: number;
+        freePercentage: number;
+    };
+    memory: {
+        totalMemMb: number;
+        usedMemMb: number;
+        freeMemMb: number;
+        freeMemPercentage: number;
+    };
+    os: {
+        oos: string;
+        platform: string;
+        hostname: string;
+    };
+}

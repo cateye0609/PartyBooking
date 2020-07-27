@@ -65,6 +65,52 @@
             </div>
           </div>
         </section>
+        <!-- Server Usage Section-->
+        <section class="server-usage pb-0">
+          <div class="container-fluid">
+            <div class="row">
+              <!-- CPU Usage Amount  -->
+              <div class="col-lg-4">
+                <div class="work-amount card mb-0">
+                  <div class="card-body">
+                    <h3>CPU Usage</h3>
+                    <div class="chart text-center">
+                      <canvas baseChart [data]="cpu_chart_data" [labels]="server_chart_label"
+                        [options]="pie_chart_options" [legend]="barChartLegend" [chartType]="pieChartType">
+                      </canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Disk Usage Amount  -->
+              <div class="col-lg-4">
+                <div class="work-amount card mb-0">
+                  <div class="card-body">
+                    <h3>Disk Usage</h3>
+                    <div class="chart text-center">
+                      <canvas baseChart [data]="disk_chart_data" [labels]="server_chart_label"
+                        [options]="pie_chart_options" [legend]="barChartLegend" [chartType]="pieChartType">
+                      </canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Memory Usage Amount  -->
+              <div class="col-lg-4">
+                <div class="work-amount card mb-0">
+                  <div class="card-body">
+                    <h3>Memory Usage</h3>
+                    <div class="chart text-center">
+                      <canvas baseChart [data]="memory_chart_data" [labels]="server_chart_label"
+                        [options]="pie_chart_options" [legend]="barChartLegend" [chartType]="pieChartType">
+                      </canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
         <!-- Charts-->
         <section class="charts">
           <div class="container-fluid">

@@ -5,8 +5,10 @@ import { throwError } from 'rxjs';
 // Services
 import { api } from '../_api/apiUrl';
 import { ToastrService } from 'ngx-toastr';
+import { CommonService } from './common.service';
 // Models
 import { ApiResponse } from '../_models/response.model';
+import { ServerUsage } from '../_models/statistic.model';
 
 @Injectable()
 export class StatisticalService {
@@ -16,7 +18,8 @@ export class StatisticalService {
     });
     constructor(
         private http: HttpClient,
-        private toastr: ToastrService
+        private toastr: ToastrService,
+        private commonService: CommonService
     ) { }
 
     // Thống kê tổng hóa đơn theo 7 ngày gần nhất
@@ -55,18 +58,15 @@ export class StatisticalService {
     get_newUpdate() {
         return this.http.get<ApiResponse>(api.new_update, { headers: this.headers })
             .pipe(
-                catchError(err => this.handleError(err, "Error while getting new updates!"))
+                catchError(err => this.commonService.handleError(err, "Error while getting new updates!"))
             );
     }
 
-    // Xử lí lỗi
-    private handleError(error: HttpErrorResponse, errorText: string) {
-        if (error.error instanceof ErrorEvent) {
-            console.error("Client side error: ", error.error.message);
-        } else {
-            console.error("Server side error: ", error.error.message);
-        }
-        this.toastr.error(errorText);
-        return throwError(errorText);
+    // Lấy thông số của server
+    get_server_usage() {
+        return this.http.get<ServerUsage>(api.server_usage, { headers: this.headers })
+            .pipe(
+                catchError(err => this.commonService.handleError(err, "Error while getting server usage!"))
+            );
     }
 }

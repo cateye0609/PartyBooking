@@ -6,7 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { StatisticalService } from '../../_services/statistical.service';
 // Models
 import { MoneyStatistic, DishStatistic, CustomerStatistic, StaffStatistic } from '../../_models/statistic.model';
-import { NewUpdateModel } from '../../_models/statistic.model';
+import { NewUpdateModel, ServerUsage } from '../../_models/statistic.model';
+
 declare var $: any;
 
 @Component({
@@ -16,6 +17,7 @@ declare var $: any;
 })
 export class AdminPageComponent implements OnInit {
   new_updates: NewUpdateModel;
+  server_usage: ServerUsage;
   dishes_statistics: DishStatistic[] = [];
 
   // Option cho biểu đồ thống kê món ăn
@@ -156,6 +158,7 @@ export class AdminPageComponent implements OnInit {
     this.customer_range_changed('day');
     this.staff_range_changed('day');
     this.get_newUpdate();
+    this.get_server_usage();
   }
 
   // Lấy Thống kê tổng hóa đơn theo 7 ngày gần nhất và tạo biểu đồ tương ứng
@@ -349,6 +352,26 @@ export class AdminPageComponent implements OnInit {
     this.statisticalService.get_newUpdate().subscribe(
       res => {
         this.new_updates = res.data as NewUpdateModel;
+      }
+    )
+  }
+
+  pie_chart_options = {
+    scaleShowVerticalLines: false,
+    responsive: true,
+  }
+  cpu_chart_data = [0, 100];
+  disk_chart_data = [0, 100];
+  memory_chart_data = [0, 100];
+  server_chart_label = ['Used', 'Free'];
+  // Lấy thông số server
+  get_server_usage() {
+    this.statisticalService.get_server_usage().subscribe(
+      res => {
+        this.server_usage = res;
+        this.cpu_chart_data = [res.cpu.usage, 100 - res.cpu.usage];
+        this.disk_chart_data = [res.drive.usedPercentage, 100 - res.drive.usedPercentage];
+        this.memory_chart_data = [100 - res.memory.freeMemPercentage, res.memory.freeMemPercentage];
       }
     )
   }

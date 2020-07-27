@@ -44,4 +44,5 @@ export const api = {
 
     // Others
     upload_image: `${apiUrl}/product/upload_image`,             // Upload ảnh
+    server_usage: `${apiUrl}/product/cpu`                       // Tình trạng server
 };
