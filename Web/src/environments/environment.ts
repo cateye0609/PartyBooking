@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://131.98.33.161:3000'
+  apiUrl: 'https://partybooking.herokuapp.com/'
 };
 
 /*

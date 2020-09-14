@@ -1,4 +1,4 @@
-export const apiUrl = "http://139.180.131.30:3000";
+export const apiUrl = "https://partybooking.herokuapp.com";
 export const api = {
     signin: `${apiUrl}/user/signin`,                            // Đăng nhập
     signout: `${apiUrl}/user/signout`,                          // Đăng xuất
