@@ -9,42 +9,65 @@
         <div class="wrapper row">
           <div class="preview col-md-6">
             <div class="preview-pic tab-content">
-              <!-- <div class="tab-pane" [attr.id]="i" [ngClass]="{'active' : i==0}"><img src={{image}} onError="http://placekitten.com/400/252" /></div> -->
-              <div class="tab-pane active" id="pic-0"><img src={{product_data?.image[0]}}
-                  onError="this.src='http://placekitten.com/400/252'" /></div>
+              <div class="tab-pane active" id="pic-0">
+                <img src={{product_data?.image[0]}} onError="this.src='http://placekitten.com/400/252'" />
+              </div>
               <div class="tab-pane" id="pic-1"><img src={{product_data?.image[1]}} /></div>
               <div class="tab-pane" id="pic-2"><img src={{product_data?.image[2]}} /></div>
               <div class="tab-pane" id="pic-3"><img src={{product_data?.image[3]}} /></div>
               <div class="tab-pane" id="pic-4"><img src={{product_data?.image[4]}} /></div>
             </div>
             <ul class="preview-thumbnail nav nav-tabs">
-              <!-- <ng-container *ngFor="let image of product_data.image ; let i=index">
-                                <li [ngClass]="{'active' : i==0}"><a [attr.data-target]="'#'+i" data-toggle="tab" *ngIf="i<5"><img class="product-thumb" src={{image}} onError="http://placekitten.com/200/126"/></a></li>
-                            </ng-container> -->
-              <li *ngIf="product_data?.image[0]"><a data-target="#pic-0" data-toggle="tab"><img class="img-thumbnail"
-                    src={{product_data?.image[0]}} /></a></li>
-              <li *ngIf="product_data?.image[1]"><a data-target="#pic-1" data-toggle="tab"><img class="img-thumbnail"
-                    src={{product_data?.image[1]}} /></a></li>
-              <li *ngIf="product_data?.image[2]"><a data-target="#pic-2" data-toggle="tab"><img class="img-thumbnail"
-                    src={{product_data?.image[2]}} /></a></li>
-              <li *ngIf="product_data?.image[3]"><a data-target="#pic-3" data-toggle="tab"><img class="img-thumbnail"
-                    src={{product_data?.image[3]}} /></a></li>
-              <li *ngIf="product_data?.image[4]"><a data-target="#pic-4" data-toggle="tab"><img class="img-thumbnail"
-                    src={{product_data?.image[4]}} /></a></li>
+              <li *ngIf="product_data?.image[0]">
+                <a data-target="#pic-0" data-toggle="tab">
+                  <img class="img-thumbnail" src={{product_data?.image[0]}} />
+                </a>
+              </li>
+              <li *ngIf="product_data?.image[1]">
+                <a data-target="#pic-1" data-toggle="tab">
+                  <img class="img-thumbnail" src={{product_data?.image[1]}} />
+                </a>
+              </li>
+              <li *ngIf="product_data?.image[2]">
+                <a data-target="#pic-2" data-toggle="tab">
+                  <img class="img-thumbnail" src={{product_data?.image[2]}} />
+                </a>
+              </li>
+              <li *ngIf="product_data?.image[3]">
+                <a data-target="#pic-3" data-toggle="tab">
+                  <img class="img-thumbnail" src={{product_data?.image[3]}} />
+                </a>
+              </li>
+              <li *ngIf="product_data?.image[4]">
+                <a data-target="#pic-4" data-toggle="tab">
+                  <img class="img-thumbnail" src={{product_data?.image[4]}} />
+                </a>
+              </li>
             </ul>
           </div>
           <div class="details col-md-6">
-            <h3 class="product-title">{{product_data?.name}}</h3>
+            <h3 class="product__title">{{product_data?.name}}</h3>
             <div class="rating">
-              <bar-rating [rate]="product_ratings?.avg_rate" [max]="5" [theme]="'fontawesome'" [readOnly]="true">
+              <bar-rating 
+                [rate]="product_ratings?.avg_rate" 
+                [max]="5" 
+                [theme]="'fontawesome'" 
+                [readOnly]="true">
               </bar-rating>
-              <span (click)="scroll(review)" class="review-no review-link">{{product_ratings?.count_rate}}
-                reviews</span>
+              <span (click)="scroll(review)" class="review-no review-link">
+                {{product_ratings?.count_rate}} reviews
+              </span>
             </div>
             <p style="font-weight: bold">Description:</p>
-            <p class="product-description">{{product_data?.description}}</p>
-            <p class="category">Type: <a
-                href="category/{{product_data?.categories[0]}}"><span>{{product_data?.categories[0]}}</span></a></p>
+            <p class="product__description" [class.product_description--full]="show">{{product_data?.description}}</p>
+            <p class="product__description--more" (click)="show = !show" *ngIf="!show">
+              {{ show ? 'Less': 'More' }}</p>
+            <p class="category">
+              Type: 
+              <a href="category/{{product_data?.categories[0]}}">
+                <span>{{product_data?.categories[0]}}</span>
+              </a>
+            </p>
             <h4 class="price">
               Price: <span>{{product_data?.price_new | number}} VND</span>
               <span class="original-price" *ngIf="product_data?.discount>0">{{product_data?.price}} VND</span>
@@ -52,12 +75,16 @@
             <div class="action">
               <div class="form-group">
                 <label>Quantity</label>
-                <input type="number" value="1" class="form-control quantity" min="1" max="100"
+                <input 
+                  type="number" 
+                  value="1" 
+                  class="form-control quantity" 
+                  min="1" max="100"
                   (change)="quantityChanged($event)">
               </div>
-              <button class="btn btn-round btn-danger" type="button" (click)="addToCart()"><i
-                  class="fa fa-shopping-cart"></i> Add to cart</button>
-              <!-- <button class="btn btn-round btn-danger" type="button"><i class="fa fa-heart"></i></button> -->
+              <button class="btn btn-round btn-danger" type="button" (click)="addToCart()">
+                <i class="fa fa-shopping-cart"></i> Add to cart
+              </button>
             </div>
           </div>
         </div>
@@ -85,7 +112,10 @@
       </div>
     </div>
     <h6 #review class="sub-header">Dish reviews</h6>
-    <app-product-rating [productId]="product_data?._id" [productRating]="product_ratings" *ngIf="product_ratings">
+    <app-product-rating 
+      [productId]="product_data?._id" 
+      [productRating]="product_ratings" 
+      *ngIf="product_ratings">
     </app-product-rating>
   </div>
   <app-footer></app-footer>

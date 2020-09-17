@@ -121,7 +121,7 @@ a:hover {
   flex-grow: 1;
 }
 
-.product-title, .price, .category, .sizes, .colors {
+.product__title, .price, .category, .sizes, .colors {
   font-weight: bold;
 }
 
@@ -183,12 +183,29 @@ span.review-link:hover {
   color: #ff9f1a;
 }
 
-.product-title, .rating, .product-description, .price, .vote, .sizes {
+.product__title, .rating, .product__description, .price, .vote, .sizes {
   margin-bottom: 15px;
 }
 
-.product-title {
+.product__title {
   margin-top: 0;
+}
+
+.product__description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+.product_description--full {
+  -webkit-line-clamp: unset;
+}
+
+.product__description--more {
+  cursor: pointer;
+  color: #007bff;
 }
 
 .size {

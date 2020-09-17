@@ -27,6 +27,7 @@ export class ProductDetailComponent implements OnInit {
   products_list = []; // Tạm thời
   item_quantity = 1;
 
+  show = true;
   constructor(
     private productService: ProductService,
     private activatedRoute: ActivatedRoute,
@@ -42,6 +43,9 @@ export class ProductDetailComponent implements OnInit {
           this.product_data = res.data as Product;
           this.get_suggestList(this.product_data.categories[0]);
           // this.product_filter(this.product_data.categories); // tạm thời
+          if (this.product_data.description.length > 250) {
+            this.show = false;
+          };
         },
         err => {
           console.log("Error: " + err.error.message);
