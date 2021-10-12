@@ -5,8 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatTableModule } from '@angular/material/table';
+// import { MatExpansionModule } from '@angular/material/expansion';
+// import { MatTableModule } from '@angular/material/table';
 import { BarRatingModule } from "ngx-bar-rating";
 import { NgxStripeModule } from 'ngx-stripe';
 import { ToastrModule } from 'ngx-toastr';
@@ -107,8 +107,8 @@ import { MapComponent } from './pages/map/map.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatExpansionModule,
-    MatTableModule,
+    // MatExpansionModule,
+    // MatTableModule,
     BarRatingModule,
     NgxStripeModule.forRoot('pk_test_28owFDjd02mGhWN5XUDoq1S700UciXGH9F'),
     ReactiveFormsModule,
