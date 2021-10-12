@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { StripeService, Elements, Element as StripeElement, ElementsOptions } from "ngx-stripe";
+import { StripeElements, StripeElement, StripeElementsOptions } from '@stripe/stripe-js';
+import { StripeService } from "ngx-stripe";
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -13,7 +14,7 @@ export class PaymentInfoComponent implements OnInit {
   errorText: string;
   error: boolean = false;
 
-  elements: Elements;
+  elements: StripeElements;
   // card: StripeElement;
 
   cardNumber: StripeElement;
@@ -21,7 +22,7 @@ export class PaymentInfoComponent implements OnInit {
   cardCvc: StripeElement;
 
   // optional parameters
-  elementsOptions: ElementsOptions = {
+  elementsOptions: StripeElementsOptions = {
     locale: 'en'
   };
 
@@ -88,20 +89,20 @@ export class PaymentInfoComponent implements OnInit {
   }
 
   buy() {
-    const name = this.stripeTest.get('name').value;
-    this.stripeService
-      .createToken(this.cardNumber, null)
-      .subscribe(result => {
-        if (result.token) {
-          // Use the token to create a charge or a customer
-          // https://stripe.com/docs/charges
-          console.log(result.token);
-          this.toastr.success("Payment success!");
-        } else if (result.error) {
-          // Error creating the token
-          console.log(result.error.message);
-          this.errorText = result.error.message;
-        }
-      });
+    // const name = this.stripeTest.get('name').value;
+    // this.stripeService
+      // .createToken(this.elements.getElement(this.cardNumber), null)
+      // .subscribe(result => {
+        // if (result.token) {
+          // // Use the token to create a charge or a customer
+          // // https://stripe.com/docs/charges
+          // console.log(result.token);
+          // this.toastr.success("Payment success!");
+        // } else if (result.error) {
+          // // Error creating the token
+          // console.log(result.error.message);
+          // this.errorText = result.error.message;
+        // }
+      // });
   }
 }
