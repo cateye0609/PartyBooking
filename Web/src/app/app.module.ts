@@ -5,14 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { MatExpansionModule } from '@angular/material/expansion';
-// import { MatTableModule } from '@angular/material/table';
 import { BarRatingModule } from "ngx-bar-rating";
 import { NgxStripeModule } from 'ngx-stripe';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DatePipe } from '@angular/common';
-// import { AgmCoreModule } from '@agm/core';
 
 //Services
 import { AuthenticationService } from './_services/authentication.service';
@@ -40,7 +37,6 @@ import { EditPictureComponent } from './pages/User/Edit profile/edit-picture/edi
 import { UserProfileComponent } from './pages/User/Profile/user-profile/user-profile.component';
 import { UserCartInfoComponent } from './pages/User/Profile/user-cart-info/user-cart-info.component';
 import { NotFoundComponent } from './pages/not_found/not-found.component';
-import { JwPaginationComponent } from 'jw-angular-pagination';
 import { UserCartComponent } from './pages/User/Cart/user-cart/user-cart.component';
 import { UserCheckoutComponent } from './pages/User/Cart/user-checkout/user-checkout.component';
 import { ProductDetailComponent } from './pages/Products/product-detail/product-detail.component';
@@ -79,7 +75,6 @@ import { MapComponent } from './pages/map/map.component';
     UserProfileComponent,
     UserCartInfoComponent,
     NotFoundComponent,
-    JwPaginationComponent,
     UserCartComponent,
     UserCheckoutComponent,
     ProductDetailComponent,
@@ -107,8 +102,6 @@ import { MapComponent } from './pages/map/map.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    // MatExpansionModule,
-    // MatTableModule,
     BarRatingModule,
     NgxStripeModule.forRoot('pk_test_28owFDjd02mGhWN5XUDoq1S700UciXGH9F'),
     ReactiveFormsModule,
@@ -118,10 +111,6 @@ import { MapComponent } from './pages/map/map.component';
       preventDuplicates: true,
     }),
     NgxPaginationModule,
-    // AgmCoreModule.forRoot({
-    //   apiKey: "AIzaSyD0KIBgr_Ixh5sLNqAW-zJ_13sxDtk7F3g",
-    //   libraries: ["places", "geometry"]
-    // })
   ],
   providers: [
     AuthenticationService,

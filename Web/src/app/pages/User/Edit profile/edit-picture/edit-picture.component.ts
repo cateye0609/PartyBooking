@@ -14,7 +14,7 @@ import { ApiResponse } from '../../../../_models/response.model';
   styleUrls: ['./edit-picture.component.css']
 })
 export class EditPictureComponent implements OnInit {
-  @ViewChild('updatepicture', null) avatarForm: NgForm;
+  @ViewChild('updatepicture') avatarForm: NgForm;
 
   avtUrl: string;
   avatarFile: any[];
