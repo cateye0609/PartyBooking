@@ -1,123 +1,55 @@
-//Modules
-import { BrowserModule } from '@angular/platform-browser';
+import { DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BarRatingModule } from "ngx-bar-rating";
 import { NgxStripeModule } from 'ngx-stripe';
 import { ToastrModule } from 'ngx-toastr';
-import { NgxPaginationModule } from 'ngx-pagination';
-import { DatePipe } from '@angular/common';
-
-//Services
-import { AuthenticationService } from './_services/authentication.service';
-import { ProductService } from './_services/product.service';
-import { UserService } from './_services/user.service';
-
-//Guard
-import { AuthGuard } from './_guard/auth.guard';
-import { PaymentGuard } from './_guard/payment.guard';
-import { CheckoutGuard } from './_guard/checkout.guard';
-
-//Components
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './component/header/header.component';
-import { FooterComponent } from './component/footer/footer.component';
-import { UserloginComponent } from './pages/User/userlogin/userlogin.component';
-import { UserregisterComponent } from './pages/User/userregister/userregister.component';
-import { MainpageComponent } from './pages/mainpage/mainpage.component';
-import { UserInfoComponent } from './pages/User/Profile/user-info/user-info.component';
-import { EditInfoComponent } from './pages/User/Edit profile/edit-info/edit-info.component';
-import { EditPasswordComponent } from './pages/User/Edit profile/edit-password/edit-password.component';
-import { ForgotpasswordComponent } from './pages/User/forgotpassword/forgotpassword.component';
-import { EditProfileComponent } from './pages/User/Edit profile/edit-profile/edit-profile.component';
-import { EditPictureComponent } from './pages/User/Edit profile/edit-picture/edit-picture.component';
-import { UserProfileComponent } from './pages/User/Profile/user-profile/user-profile.component';
-import { UserCartInfoComponent } from './pages/User/Profile/user-cart-info/user-cart-info.component';
-import { NotFoundComponent } from './pages/not_found/not-found.component';
-import { UserCartComponent } from './pages/User/Cart/user-cart/user-cart.component';
-import { UserCheckoutComponent } from './pages/User/Cart/user-checkout/user-checkout.component';
-import { ProductDetailComponent } from './pages/Products/product-detail/product-detail.component';
-import { ProductCategoryComponent } from './pages/Products/product-category/product-category.component';
-import { SearchComponent } from './pages/Products/search/search.component';
-import { ProductRatingComponent } from './pages/Products/product-rating/product-rating.component';
+import { AuthModule } from './auth/auth.module';
+import { HomeModule } from './home/home.module';
 import { AboutComponent } from './pages/about/about.component';
-import { ScrollToTopComponent } from './component/scroll-to-top/scroll-to-top.component';
-import { ReceiptComponent } from './pages/User/payment/receipt/receipt.component';
-import { PaymentComponent } from './pages/User/payment/payment-layout/payment-layout.component';
-import { PaymentSuccessComponent } from './pages/User/payment/payment-success/payment-success.component';
-import { PaymentFailComponent } from './pages/User/payment/payment-fail/payment-fail.component';
-import { PaymentInfoComponent } from './pages/User/payment/payment-info/payment-info.component';
-import { PaymentMobileComponent } from './pages/User/payment/payment-mobile/payment-mobile.component';
-import { PostListComponent } from './pages/post/post-list/post-list.component';
-import { PostDetailComponent } from './pages/post/post-detail/post-detail.component';
-import { LoadingComponent } from './component/loading/loading.component';
-import { SafeHtml } from './_pipes/safeHtml.pipe';
-import { CardLoadingComponent } from './component/card-loading/card-loading.component';
 import { MapComponent } from './pages/map/map.component';
+import { NotFoundComponent } from './pages/not_found/not-found.component';
+import { PaymentModule } from './payment/payment.module';
+import { PostModule } from './post/post.module';
+import { ProductModule } from './products/product.module';
+import { SearchComponent } from './products/search/search.component';
+import { SharedModule } from './shared/shared.module';
+import { UserModule } from './user/user.module';
+import { AuthGuard } from './_guard/auth.guard';
+import { CheckoutGuard } from './_guard/checkout.guard';
+import { PaymentGuard } from './_guard/payment.guard';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    UserloginComponent,
-    UserregisterComponent,
-    MainpageComponent,
-    UserInfoComponent,
-    EditInfoComponent,
-    EditPasswordComponent,
-    ForgotpasswordComponent,
-    EditProfileComponent,
-    EditPictureComponent,
-    UserProfileComponent,
-    UserCartInfoComponent,
     NotFoundComponent,
-    UserCartComponent,
-    UserCheckoutComponent,
-    ProductDetailComponent,
-    ProductCategoryComponent,
     SearchComponent,
-    ProductRatingComponent,
     AboutComponent,
-    ScrollToTopComponent,
-    ReceiptComponent,
-    PaymentComponent,
-    PaymentSuccessComponent,
-    PaymentFailComponent,
-    PaymentInfoComponent,
-    PaymentMobileComponent,
-    PostListComponent,
-    PostDetailComponent,
-    LoadingComponent,
-    SafeHtml,
-    CardLoadingComponent,
     MapComponent
   ],
   imports: [
     BrowserModule,
+    SharedModule,
+    AuthModule,
+    HomeModule,
+    ProductModule,
+    PostModule,
+    UserModule,
+    PaymentModule,
     AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
     BrowserAnimationsModule,
-    BarRatingModule,
     NgxStripeModule.forRoot('pk_test_28owFDjd02mGhWN5XUDoq1S700UciXGH9F'),
-    ReactiveFormsModule,
     ToastrModule.forRoot({
       timeOut: 1500,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
-    }),
-    NgxPaginationModule,
+    })
   ],
   providers: [
-    AuthenticationService,
     AuthGuard,
-    ProductService,
     DatePipe,
-    UserService,
     PaymentGuard,
     CheckoutGuard
   ],
