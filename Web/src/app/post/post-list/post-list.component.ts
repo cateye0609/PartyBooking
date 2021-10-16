@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import { Post } from 'src/app/_models/post.model';
 import { PostService } from 'src/app/_services/post.service';
 
@@ -15,7 +14,6 @@ export class PostListComponent implements OnInit {
 
   constructor(
     private postService: PostService,
-    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -29,11 +27,6 @@ export class PostListComponent implements OnInit {
         this.post_list = res.data.value as Post[];
         this.total_pages = res.data.total_page;
         this.page = page;
-      },
-      err => {
-        console.log("Error: " + err.error.message);
-        this.toastr.error("Error loading posts list!");
-      }
-    )
+      })
   }
 }

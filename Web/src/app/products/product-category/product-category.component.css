@@ -95,7 +95,7 @@ a:hover {
   transition: transform .3s;
 }
 
-.category-title:hover {
+.category-title:hover, .category-title.active {
   background-color: #4DAD16;
   color: white;
 }
@@ -104,7 +104,7 @@ a:hover {
   font-size: 1.2em;
 }
 
-.category-title:hover img {
+.category-title:hover img.pbicon, .category-title.active img.pbicon {
   filter: brightness(0) invert(1);
 }
 
@@ -120,6 +120,7 @@ a:hover {
   background-color: #ef4d4d;
   color: white !important;
   transform: scale(1.1);
+  border-color: #ef4d4d;
 }
 
 .jw-pagination .pagination li.page-number {

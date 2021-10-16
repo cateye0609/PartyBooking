@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { api } from '../_api/apiUrl';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-// Models
+import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { catchError } from 'rxjs/operators';
+import { api } from '../_api/apiUrl';
 import { Item } from '../_models/item.model';
 import { ApiResponse } from '../_models/response.model';
-// Services
-import { ToastrService } from 'ngx-toastr';
+import { CommonService } from './common.service';
 
 
 @Injectable({ providedIn: 'root' })
@@ -15,28 +15,33 @@ export class ProductService {
 
     constructor(
         private http: HttpClient,
-        private toastr: ToastrService
+        private toastr: ToastrService,
+        private commonService: CommonService
     ) {
         this.loadCartItems();
     }
     // Lấy danh sách sản phẩm
     get_DishList() {
-        return this.http.get<ApiResponse>(api.get_dishlist);
+        return this.http.get<ApiResponse>(api.get_dishlist)
+            .pipe(catchError(err => this.commonService.handleError(err)));
     }
 
     // Lấy thông tin 1 sản phẩm
     get_dish(id: string) {
-        return this.http.get<ApiResponse>(api.get_dish + "/" + id);
+        return this.http.get<ApiResponse>(api.get_dish + "/" + id)
+            .pipe(catchError(err => this.commonService.handleError(err)));
     }
 
     // Lấy danh sách sản phẩm của 1 category
     get_dish_by_category(category: string, page: number) {
-        return this.http.get<ApiResponse>(api.get_category + "?categories=" + category + "&page=" + page);
+        return this.http.get<ApiResponse>(api.get_category + "?categories=" + category + "&page=" + page)
+            .pipe(catchError(err => this.commonService.handleError(err)));
     }
 
     // Lấy toàn bộ comment và rating của món ăn
     get_dishRating(dish_id: string, page: number) {
-        return this.http.get<ApiResponse>(api.product_rate + "?id=" + dish_id + "&page=" + page);
+        return this.http.get<ApiResponse>(api.product_rate + "?id=" + dish_id + "&page=" + page)
+            .pipe(catchError(err => this.commonService.handleError(err)));
     }
 
     // Chỉnh sửa comment và rating của món ăn
@@ -46,7 +51,8 @@ export class ProductService {
             'Authorization': localStorage.getItem('token'),
         })
         let body = `id=${rating_id}&score=${rating}&comment=${content}`;
-        return this.http.put<ApiResponse>(api.product_rate, body, { headers: headers });
+        return this.http.put<ApiResponse>(api.product_rate, body, { headers: headers })
+            .pipe(catchError(err => this.commonService.handleError(err)));
     }
 
     // Thêm comment và rating của món ăn
@@ -56,7 +62,8 @@ export class ProductService {
             'Authorization': localStorage.getItem('token'),
         })
         let body = `id=${dish_id}&score=${rating}&comment=${content}`;
-        return this.http.post<ApiResponse>(api.product_rate, body, { headers: headers });
+        return this.http.post<ApiResponse>(api.product_rate, body, { headers: headers })
+            .pipe(catchError(err => this.commonService.handleError(err)));
     }
 
     //API CŨ

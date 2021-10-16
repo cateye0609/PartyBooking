@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { Post } from 'src/app/_models/post.model';
 import { PostService } from 'src/app/_services/post.service';
 
@@ -18,8 +17,7 @@ export class PostDetailComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private postService: PostService,
-    private router: Router,
-    private toastr: ToastrService
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -39,8 +37,6 @@ export class PostDetailComponent implements OnInit {
         if (err.error.message == "Không tìm thấy Id bài viết") {
           this.router.navigate(['/404']);
         }
-        console.log("Error: " + err.error.message);
-        this.toastr.error("Error loading post!");
       }
     )
   }
@@ -50,11 +46,6 @@ export class PostDetailComponent implements OnInit {
     this.postService.get_posts_list_byAuthor(name).subscribe(
       res => {
         this.similar_posts = res.data as Post[];
-      },
-      err => {
-        console.log("Error: " + err.error.message);
-        this.toastr.error("Error loading similar posts!");
-      }
-    )
+      })
   }
 }

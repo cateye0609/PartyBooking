@@ -28,29 +28,18 @@ export class ProductDetailComponent implements OnInit {
   show = true;
   constructor(
     private productService: ProductService,
-    private activatedRoute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
     this.products_list = JSON.parse(localStorage.getItem('dish_list')); // Tạm thời
-    // Gọi api lấy thông tin món ăn
-    this.activatedRoute.params.subscribe(params => {
-      let product_id = params['id'];
-      this.productService.get_dish(product_id).subscribe(
-        res => {
-          this.product_data = res.data as Product;
-          this.get_suggestList(this.product_data.categories[0]);
-          // this.product_filter(this.product_data.categories); // tạm thời
-          if (this.product_data.description.length > 250) {
-            this.show = false;
-          };
-        },
-        err => {
-          console.log("Error: " + err.error.message);
-          sessionStorage.setItem('error', JSON.stringify(err));
-        }
-      );
-      this.get_dishRating(product_id);
+    this.activatedRoute.data.subscribe(data => {
+      this.product_data = data['product'];
+      this.get_suggestList(this.product_data.categories[0]);
+      if (this.product_data.description.length > 250) {
+        this.show = false;
+      };
+      this.get_dishRating(this.product_data._id);
     })
   }
   // Lấy thông tin rating của món ăn
@@ -58,24 +47,14 @@ export class ProductDetailComponent implements OnInit {
     this.productService.get_dishRating(dish_id, 1).subscribe(
       res => {
         this.product_ratings = res.data as Dish_rating;
-      },
-      err => {
-        console.log("Error: " + err.error.message);
-        sessionStorage.setItem('error', JSON.stringify(err));
-      }
-    )
+      },)
   }
   // Lấy danh sách sản phẩm tương tự
   get_suggestList(category: string) {
     this.productService.get_dish_by_category(category, 1).subscribe(
       res => {
         this.suggest_list = res.data.value as Product[];
-      },
-      err => {
-        console.log("Error: " + err.error.message);
-        sessionStorage.setItem('error', JSON.stringify(err));
-      }
-    )
+      })
   }
 
   // Tạm thời

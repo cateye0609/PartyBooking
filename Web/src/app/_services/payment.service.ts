@@ -1,11 +1,9 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { Injectable } from '@angular/core';
+import { catchError } from 'rxjs/operators';
 import { api } from '../_api/apiUrl';
-//Models
-import { Payment } from '../_models/payment.model';
 import { ApiResponse } from '../_models/response.model';
-//Services
+import { CommonService } from './common.service';
 import { StripeService } from './stripe.service';
 
 @Injectable({ providedIn: 'root' })
@@ -18,6 +16,7 @@ export class PaymentService {
     constructor(
         private http: HttpClient,
         private stripeService: StripeService,
+        private commonService: CommonService
     ) { }
 
     pay(checkout_session_id: string) {
@@ -32,6 +31,7 @@ export class PaymentService {
         const option = {
             headers: this.headers,
         }
-        return this.http.get<ApiResponse>(api.get_payment + '?_id=' + bill_id, option);
+        return this.http.get<ApiResponse>(api.get_payment + '?_id=' + bill_id, option)
+            .pipe(catchError(err => this.commonService.handleError(err)));
     }
 }

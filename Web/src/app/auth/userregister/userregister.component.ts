@@ -27,12 +27,7 @@ export class UserregisterComponent implements OnInit {
         this.toastr.success("Register success!");
         sessionStorage.setItem('response', JSON.stringify(res.body));
         this.router.navigate(['/user_login']);
-      },
-      err => {
-        this.toastr.error("Error: " + err.status + " " + err.error.message);
-        sessionStorage.setItem('error', JSON.stringify(err));
-      }
-    )
+      })
   }
 
   ngOnInit() { }

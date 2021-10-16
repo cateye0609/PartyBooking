@@ -14,7 +14,6 @@ export class ProductCategoryComponent implements OnInit {
   total_pages: number;
 
   cat_filter: string;
-  // pageOfItems: Array<any>;
 
   constructor(
     private productService: ProductService,
@@ -37,31 +36,18 @@ export class ProductCategoryComponent implements OnInit {
         this.filtered_products = res.data.value as Product[];
         this.total_pages = res.data.total_page;
         this.page = page;
-      },
-      err => {
-        console.log("Error: " + err.error.message);
-        sessionStorage.setItem('error', JSON.stringify(err));
-      }
-    )
+      })
   }
 
-  // onChangePage(pageOfItems: Array<any>) {
-  //   this.pageOfItems = pageOfItems;
-  // }
-
-  // product_filter(filter: string) {
-  //   for (var i = 0; i < this.products_data.length; i++) {
-  //     if (this.products_data[i].categories == filter) {
-  //       this.filtered_products.push(this.products_data[i]);
-  //     }
-  //   }
-  // }
-
   ngOnInit() {
-    // this.products_data = JSON.parse(localStorage.getItem('dish_list'));
     this.activatedRoute.params.subscribe(params => {
       this.cat_filter = params['filter'];
-      this.get_dishes_byCate(this.cat_filter, 1);
-    })
+      // this.get_dishes_byCate(this.cat_filter, 1);
+    });
+    this.activatedRoute.data.subscribe(data => {
+      this.filtered_products = data['productCategory'].value as Product[];
+      this.total_pages = data['productCategory'].total_page;
+      this.page = 1;
+    });
   }
 }

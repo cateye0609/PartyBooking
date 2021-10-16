@@ -188,11 +188,6 @@ export class ProductRatingComponent implements OnInit {
         this.list_rate = (res.data as Dish_rating).list_rate;
         this.total_pages = res.data.total_page;
         this.page = page;
-      },
-      err => {
-        console.log("Error: " + err.error.message);
-        sessionStorage.setItem('error', JSON.stringify(err));
-      }
-    )
+      })
   }
 }

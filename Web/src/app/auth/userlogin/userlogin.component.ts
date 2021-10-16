@@ -29,10 +29,6 @@ export class UserloginComponent implements OnInit {
         localStorage.setItem('userinfo', JSON.stringify(user_info));
         localStorage.setItem('avatar', user_info.avatar);
         this.location.back();
-      },
-      err => {
-        this.toastr.error("Error: " + err.status + " " + err.error.message);
-        sessionStorage.setItem('error', JSON.stringify(err));
       });
   }
 
