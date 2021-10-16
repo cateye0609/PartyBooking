@@ -44,7 +44,7 @@
               </a>
               <div class="card-body">
                 <h5 class="card-title">
-                  <a [routerLink]="['/product', product._id]">{{product.name}}</a>
+                  <a [routerLink]="['/product', product._id]" class="text-green">{{product.name}}</a>
                 </h5>
                 <h6 class="text-uppercase">
                   {{product?.price | number}} {{product?.currency}}

@@ -14,13 +14,6 @@ a:hover {
   overflow: hidden;
 }
 
-.product-card {
-  -webkit-box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.35);
-  -moz-box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.35);
-  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.35);
-  border: none;
-}
-
 .item-thumb-wrapper {
   overflow: hidden;
 }

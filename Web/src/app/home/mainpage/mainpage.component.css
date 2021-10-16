@@ -27,15 +27,6 @@ a:hover {
   overflow: hidden;
 }
 
-.product-card {
-  -webkit-box-shadow: 1px 1px 6px 1px rgba(0, 0, 0, 0.35);
-  -moz-box-shadow: 1px 1px 6px 1px rgba(0, 0, 0, 0.35);
-  box-shadow: 1px 1px 6px 1px rgba(0, 0, 0, 0.35);
-  /* v2 */
-  /* box-shadow: -15px -15px 15px rgba(255, 255, 255, 0.5), 
-              15px 15px 15px rgba(0, 0, 0, 0.05); */
-}
-
 .item-thumb-wrapper {
   overflow: hidden;
 }
@@ -139,9 +130,12 @@ a:hover {
   background-color: #ef4d4d;
   color: white !important;
   transform: scale(1.1);
+  border-color: #ef4d4d;
 }
 
 .view-more-btn {
+  color: #4DAD16;
+  border-color: #4DAD16;
   margin: 1em;
   padding: 6px 2em;
   transition: transform .3s;
@@ -149,6 +143,17 @@ a:hover {
 
 .view-more-btn:hover {
   transform: scale(1.1);
+  background-color: #4DAD16;
+  border-color: #4DAD16;
+}
+
+.view-more-btn:focus {
+  box-shadow: none!important;
+}
+
+.view-more-btn:active {
+  background-color: #4DAD16!important;
+  border-color: #4DAD16!important;
 }
 
 .big-thumb-img {

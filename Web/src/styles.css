@@ -10,6 +10,10 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.text-green {
+    color: #4DAD16;
+}
+
 .dark-grey-text {
     color: #4f4f4f !important;
 }
@@ -17,6 +21,17 @@ body {
 /* .dark-grey-text:hover, .dark-grey-text:focus {
     color: #4f4f4f !important;
 } */
+
+.product-card {
+    -webkit-box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.35);
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.35);
+    border: none;
+}
+
+.product-card .card-body h5.card-title>a:hover {
+    color: #1e7e34;
+}
 
 .pb-pagination ::ng-deep .ngx-pagination .current {
     background-color: #2ecc71;
