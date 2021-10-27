@@ -30,7 +30,6 @@
         </div>
       </div>
       <div class="main-content col-lg-9">
-        <!--div class="sorting-panel"></div-->
         <h3 class="section-title">{{cat_filter}}</h3>
         <div class="grid-container row">
           <div class="grid-item col-lg-4 col-md-6 mb-4"
@@ -44,16 +43,18 @@
               </a>
               <div class="card-body">
                 <h5 class="card-title">
-                  <a [routerLink]="['/product', product._id]" class="text-green">{{product.name}}</a>
+                  <a [routerLink]="['/product', product._id]">{{product.name}}</a>
                 </h5>
                 <h6 class="text-uppercase">
                   {{product?.price | number}} {{product?.currency}}
                   <span class="discount-percent" *ngIf="product?.discount>0">{{product?.discount}}% off</span>
                 </h6>
-                <p class="card-text">{{product?.description}}</p>
+                <p class="card-text text-secondary">{{product?.description}}</p>
               </div>
               <div class="card-footer">
-                <a class="btn btn-outline-secondary add-cart-btn" (click)="addCart(product._id)">Add to cart</a>
+                <button class="btn btn-outline-secondary add-cart-btn w-100" (click)="addCart(product._id)">
+                  Add to cart
+                </button>
               </div>
             </div>
           </div>

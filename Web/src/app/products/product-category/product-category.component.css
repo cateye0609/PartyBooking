@@ -14,30 +14,6 @@ a:hover {
   overflow: hidden;
 }
 
-.item-thumb-wrapper {
-  overflow: hidden;
-}
-
-.item-thumb {
-  height: 11em;
-  -webkit-transform: scale(1);
-  transform: scale(1);
-  -webkit-transition: .3s ease-in-out;
-  transition: .3s ease-in-out;
-}
-
-.item-thumb:hover {
-  /* Blur effect
-    webkit-filter: blur(4px);
-    filter: blur(4px); */
-  -webkit-transform: scale(1.3);
-  transform: scale(1.3);
-}
-
-.item-thumb {
-  max-height: 10em;
-}
-
 .content-container {
   padding: 20px;
 }
@@ -99,10 +75,6 @@ a:hover {
 
 .category-title:hover img.pbicon, .category-title.active img.pbicon {
   filter: brightness(0) invert(1);
-}
-
-.section-title {
-  color: #2ecc71;
 }
 
 .add-cart-btn {
